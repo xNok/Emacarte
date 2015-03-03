@@ -36,6 +36,14 @@
         <servlet-name>GameServlet</servlet-name>
         <servlet-class>fr.emacarte.servlet.GameServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>HomeServlet</servlet-name>
+        <servlet-class>fr.emacarte.servlet.HomeServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProfileServlet</servlet-name>
+        <servlet-class>fr.emacarte.servlet.ProfileServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UserHomeServlet</servlet-name>
         <url-pattern>/membre/home</url-pattern>
@@ -54,7 +62,15 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>GameServlet</servlet-name>
-        <url-pattern>/game</url-pattern>
+        <url-pattern>/jeux</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HomeServlet</servlet-name>
+        <url-pattern>/home</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProfileServlet</servlet-name>
+        <url-pattern>/profile</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
