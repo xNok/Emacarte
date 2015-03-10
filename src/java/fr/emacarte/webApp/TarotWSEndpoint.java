@@ -17,6 +17,7 @@ import javax.websocket.OnError;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
+import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 
 /**
@@ -25,27 +26,44 @@ import javax.websocket.server.ServerEndpoint;
  */
 
 @ApplicationScoped
-@ServerEndpoint("/tarot")
+@ServerEndpoint("/tarot/{room}")
 public class TarotWSEndpoint {
     
     @Inject
-    private TarotSessionHandler sessionHandler = new TarotSessionHandler();  
+    private static TarotSessionHandler sessionHandler;  
 
-    @OnMessage
-    public String onMessage(String message, Session session) throws IOException {       
-        sendMessage(message, session);
-        return "message recu : " + message;
+    @OnOpen
+    public void onOpen(final Session session, @PathParam("room") String room) throws IOException {      
+        session.getUserProperties().put("room", room);
+        
+        sendMessage("Connecté salle : " + room, session);
+        sendMessage(session.toString(), session);
+        sendMessage("Utilisateurs connectés : "  + session.getOpenSessions().size(), session);
     }
     
-    @OnOpen
-    public void onOpen(Session session) throws IOException {
-        sendMessage("Connecté", session);
+    @OnMessage
+    public void onMessage(final Session session, String message) {       
+        String room = (String) session.getUserProperties().get("room");
+        for(Session s : session.getOpenSessions()){
+            if(s.isOpen() && room.equals(s.getUserProperties().get("room"))){
+                try {
+                    sendMessage(message, session);
+                } catch (IOException ex) {
+                    Logger.getLogger(TarotWSEndpoint.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } 
     }
 
     @OnClose
     public void onClose (Session session) {
         System.out.println("Un utilisateur est déconnecté");
         sessionHandler.removeSession(session);
+    }
+    
+    @OnError
+    public void onError(Throwable error) {
+        
     }
     
     
