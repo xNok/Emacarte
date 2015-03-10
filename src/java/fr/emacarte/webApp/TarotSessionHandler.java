@@ -5,6 +5,7 @@
  */
 package fr.emacarte.webApp;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 import javax.faces.bean.ApplicationScoped;
@@ -30,4 +31,7 @@ public class TarotSessionHandler {
     public int getNbrSession(){
         return sessions.size();
     }
+    
+    
+
 }
