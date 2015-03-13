@@ -1,7 +1,7 @@
 (function($){
 $(document).ready(function(){ 
 
-var wsUri = "ws://localhost:8080/Emacarte/tarot";
+var wsUri = "ws://localhost:8080/Emacarte/tarot/23";
 
 var websocket = new WebSocket(wsUri);
 var output = $('#output');
