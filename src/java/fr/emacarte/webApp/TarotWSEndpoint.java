@@ -5,13 +5,11 @@
  */
 package fr.emacarte.webApp;
 
-import fr.emacarte.webApp.app.Tarot;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ApplicationScoped;
 import javax.inject.Inject;
-import javax.websocket.CloseReason;
 import javax.websocket.OnClose;
 import javax.websocket.OnError;
 import javax.websocket.OnMessage;
@@ -47,7 +45,7 @@ public class TarotWSEndpoint {
         for(Session s : session.getOpenSessions()){
             if(s.isOpen() && room.equals(s.getUserProperties().get("room"))){
                 try {
-                    sendMessage(message, session);
+                    sendMessage(message, s);
                 } catch (IOException ex) {
                     Logger.getLogger(TarotWSEndpoint.class.getName()).log(Level.SEVERE, null, ex);
                 }
