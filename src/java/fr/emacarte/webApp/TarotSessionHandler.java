@@ -5,7 +5,6 @@
  */
 package fr.emacarte.webApp;
 
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 import javax.faces.bean.ApplicationScoped;
@@ -20,7 +19,12 @@ public class TarotSessionHandler {
     
     private final Set sessions = new HashSet<>();
     
+    public TarotSessionHandler(){
+        
+    }
+    
     public void addSession(Session session){
+        System.out.println(getNbrSession());
         sessions.add(session);
     }
     

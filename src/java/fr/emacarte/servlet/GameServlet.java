@@ -6,9 +6,7 @@
 package fr.emacarte.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,6 +18,8 @@ import javax.servlet.http.HttpServletResponse;
  * @author Alexandre
  */
 public class GameServlet extends HttpServlet {
+    
+    public static String VUE = "/WEB-INF/game/homeGame.jsp" ;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,7 +32,35 @@ public class GameServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //TODO
+        
+        String URI = request.getRequestURI();
+        String[] s = URI.split("/");
+        if(s.length < 3){
+            switch (s[3]){
+                case "create": VUE = "/WEB-INF/game/createGame.jsp";
+                 break;
+                case "join": VUE = "/WEB-INF/game/joinGame.jsp";
+                 break;
+                case "salle_de_jeux" : VUE = "/WEB-INF/game/salleGame.jsp";
+                 break;
+                default : VUE = "/WEB-INF/game/homeGame.jsp";
+             } 
+        }
+
+        
+        this.getServletContext().getRequestDispatcher(VUE).forward( request, response );
+    }
+    
+    private void create(){
+            
+    }
+    
+    private void join(){
+        
+    }
+    
+    private void salle(){
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -61,16 +61,16 @@
         <url-pattern>/connexion</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>GameServlet</servlet-name>
-        <url-pattern>/jeux</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
         <url-pattern>/home</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ProfileServlet</servlet-name>
         <url-pattern>/profile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GameServlet</servlet-name>
+        <url-pattern>/jeux/*</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

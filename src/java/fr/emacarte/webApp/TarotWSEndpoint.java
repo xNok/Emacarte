@@ -28,11 +28,12 @@ import javax.websocket.server.ServerEndpoint;
 public class TarotWSEndpoint {
     
     @Inject
-    private static TarotSessionHandler sessionHandler;  
+    private static final TarotSessionHandler sessionHandler = new TarotSessionHandler();  
 
     @OnOpen
     public void onOpen(final Session session, @PathParam("room") String room) throws IOException {      
         session.getUserProperties().put("room", room);
+        sessionHandler.addSession(session);
         
         sendMessage("Connecté salle : " + room, session);
         sendMessage(session.toString(), session);
@@ -45,7 +46,9 @@ public class TarotWSEndpoint {
         for(Session s : session.getOpenSessions()){
             if(s.isOpen() && room.equals(s.getUserProperties().get("room"))){
                 try {
-                    sendMessage(message, s);
+                    if(!s.equals(session)){
+                        sendMessage(message, s);
+                    }     
                 } catch (IOException ex) {
                     Logger.getLogger(TarotWSEndpoint.class.getName()).log(Level.SEVERE, null, ex);
                 }
