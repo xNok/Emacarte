@@ -4,13 +4,10 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Alexandre/Documents/NetBeansProjects/Emacarte/src/java/fr/emacarte/servlet/GameServlet.java</file>
-            <file>file:/C:/Users/Alexandre/Documents/NetBeansProjects/Emacarte/web/index.html</file>
             <file>file:/C:/Users/Alexandre/Documents/NetBeansProjects/Emacarte/src/java/fr/emacarte/webApp/TarotSessionHandler.java</file>
             <file>file:/C:/Users/Alexandre/Documents/NetBeansProjects/Emacarte/src/java/fr/emacarte/webApp/TarotWSEndpoint.java</file>
-            <file>file:/C:/Users/Alexandre/Documents/NetBeansProjects/Emacarte/web/WEB-INF/web.xml</file>
             <file>file:/C:/Users/Alexandre/Documents/NetBeansProjects/Emacarte/web/WEB-INF/game/salleGame.jsp</file>
-            <file>file:/C:/Users/Alexandre/Documents/NetBeansProjects/Emacarte/src/java/fr/emacarte/servlet/UserHomeServlet.java</file>
-            <file>file:/C:/Users/Alexandre/Documents/NetBeansProjects/Emacarte/web/WEB-INF/game/homeGame.jsp</file>
+            <file>file:/C:/Users/Alexandre/Documents/NetBeansProjects/Emacarte/web/WEB-INF/game/createGame.jsp</file>
             <file>file:/C:/Users/Alexandre/Documents/NetBeansProjects/Emacarte/web/js/tarot.js</file>
         </group>
     </open-files>

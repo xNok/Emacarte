@@ -4,3 +4,7 @@
     Author     : Alexandre
 --%>
 
+<h1>Créer un partie de Tarot</h1>
+<form action="" method="post">
+    <input type="submit" value="Play">
+</form>

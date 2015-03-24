@@ -1,14 +1,16 @@
 (function($){
 $(document).ready(function(){ 
 
-var wsUri = "ws://localhost:8080/Emacarte/tarot/23";
+var wsUri = "ws://localhost:8080/Emacarte/tarot/";
 
-var websocket = new WebSocket(wsUri);
+var websocket;
 var output = $('#output');
-window.onload = init;
+init();
 
 //inititialisation de la Web Socket
-function init() {    
+function init() {
+    websocket = new WebSocket(wsUri + salle);
+    
     websocket.onopen = function(evt) { onOpen(evt) };
     websocket.onmessage = function(evt) { onMessage(evt) }
     websocket.onclose = function(evt) { onClose(evt) };

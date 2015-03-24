@@ -43,6 +43,7 @@ public class TarotWSEndpoint {
     @OnMessage
     public void onMessage(final Session session, String message) {       
         String room = (String) session.getUserProperties().get("room");
+        System.out.println("Nbr sessions :" + sessionHandler.getNbrSession());
         for(Session s : session.getOpenSessions()){
             if(s.isOpen() && room.equals(s.getUserProperties().get("room"))){
                 try {

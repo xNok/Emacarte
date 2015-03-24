@@ -6,6 +6,7 @@
 package fr.emacarte.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 public class GameServlet extends HttpServlet {
     
     public static String VUE = "/WEB-INF/game/homeGame.jsp" ;
+    public static ArrayList<String> salles = new ArrayList();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,34 +35,20 @@ public class GameServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String URI = request.getRequestURI();
-        String[] s = URI.split("/");
-        if(s.length < 3){
-            switch (s[3]){
-                case "create": VUE = "/WEB-INF/game/createGame.jsp";
-                 break;
-                case "join": VUE = "/WEB-INF/game/joinGame.jsp";
-                 break;
-                case "salle_de_jeux" : VUE = "/WEB-INF/game/salleGame.jsp";
-                 break;
-                default : VUE = "/WEB-INF/game/homeGame.jsp";
-             } 
-        }
-
-        
         this.getServletContext().getRequestDispatcher(VUE).forward( request, response );
     }
     
-    private void create(){
-            
+    private void create(HttpServletRequest request, HttpServletResponse response) throws IOException{
+        salles.add(VUE);
+        response.sendRedirect("/Emacarte/jeux/salle_de_jeux?num=" + salles.size());
     }
     
-    private void join(){
+    private void join(HttpServletRequest request, HttpServletResponse response){
         
     }
     
-    private void salle(){
-        
+    private void salle(HttpServletRequest request, HttpServletResponse response){
+        request.setAttribute("salle", request.getParameter("num"));
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -75,6 +63,28 @@ public class GameServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        VUE = "/WEB-INF/game/homeGame.jsp";
+        
+        System.out.println("GET");
+        String URI = request.getRequestURI();
+        String[] s = URI.split("/");
+        if(s.length > 3){
+            System.out.println(s[3]);
+            switch (s[3]){
+                case "create": 
+                    VUE = "/WEB-INF/game/createGame.jsp";
+                 break;
+                case "join":
+                    VUE = "/WEB-INF/game/joinGame.jsp";
+                 break;
+                case "salle_de_jeux" :
+                    VUE = "/WEB-INF/game/salleGame.jsp";
+                    salle(request, response);
+                 break;
+                default : VUE = "/WEB-INF/game/homeGame.jsp";
+             } 
+        }
+        
         processRequest(request, response);
     }
 
@@ -89,7 +99,30 @@ public class GameServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        boolean create = false;
+        
+        String URI = request.getRequestURI();
+        String[] s = URI.split("/");
+        if(s.length > 3){
+            System.out.println(s[3]);
+            switch (s[3]){
+                case "create": 
+                    create(request, response);
+                    create = true;
+                 break;
+                case "join":
+                    VUE = "/WEB-INF/game/joinGame.jsp";
+                    join(request, response);
+                 break;
+                default : VUE = "/WEB-INF/game/homeGame.jsp";
+             } 
+        }
+        
+        if(!create){
+            processRequest(request, response);
+        }
+        
     }
 
     /**

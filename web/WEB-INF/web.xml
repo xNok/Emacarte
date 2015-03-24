@@ -70,7 +70,10 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>GameServlet</servlet-name>
-        <url-pattern>/jeux/*</url-pattern>
+        <url-pattern>/jeux/join</url-pattern>
+        <url-pattern>/jeux</url-pattern>
+        <url-pattern>/jeux/salle_de_jeux</url-pattern>
+        <url-pattern>/jeux/create</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
