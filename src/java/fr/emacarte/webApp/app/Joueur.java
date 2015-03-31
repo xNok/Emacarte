@@ -2,17 +2,19 @@ package fr.emacarte.webApp.app;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import javax.websocket.Session;
 
 public class Joueur {
-	private String id;
+	private Session id;
 	private ArrayList<Carte> main;
 	private float score;
-	private Scanner input;
+	private Communication com;
 
-	public Joueur(String i) {
+	public Joueur(Session i) {
 		id = i;
 		score = 0;
 		main = new ArrayList<Carte>();
+                com = new Communication();
 	}
 
 	public void afficherMain() {
@@ -82,14 +84,90 @@ public class Joueur {
 	public Carte poserCarte() {
 		afficherMain();
 		System.out.println("Veuillez poser une carte.");
-		input = new Scanner(System.in);
-		int rang = input.nextInt();// int rang=(int)(Math.random()*main.size());
+		int rang=com.entreeCarte(this);
 		Carte cartePosee = main.get(rang);
 		main.remove(rang);
 		cartePosee.afficherCarte();
 		return cartePosee;
 	}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////        
+        public Carte poserCarte(Carte demande, Carte meilleure){
+            afficherMain();
+		System.out.println("Veuillez poser une carte.");
+		int rang = com.entreeCarte(this);
+		Carte cartePosee = main.get(rang);
+                while(verifierCarte(demande,meilleure,cartePosee)==false){
+                    System.err.println("Vous ne pouvez pas poser cette carte, choisissez-en une autre !");
+                    rang=com.entreeCarte(this);
+                    cartePosee = main.get(rang);
+                }
+		main.remove(rang);
+		cartePosee.afficherCarte();
+		return cartePosee;
+        }
 	
+        public boolean verifierCarte(Carte demande, Carte meilleure, Carte choisie){
+            boolean ok=true;
+            int coul=demande.getCouleur();
+            int val=demande.getValeur();
+            if(choisie.getCouleur()!=coul){
+                if(choisie.getCouleur()!=22){
+                    if(coul==0){
+                        if(possedeCouleur(0)){
+                            ok=false;
+                        }
+                    }else{
+                        if(possedeCouleur(coul)){
+                            ok=false;
+                        }
+                        if(choisie.getCouleur()!=0){
+                            if(possedeCouleur(0)){
+                                ok=false;
+                            }
+                        }
+                    }
+                }
+            }
+            if(choisie.getCouleur()==0){
+                if(meilleure.getCouleur()==0){
+                    if(meilleure.getValeur()>choisie.getValeur()){
+                        if(possedePlusGrandAtout(meilleure.getValeur())){
+                            ok=false;
+                        }
+                    }
+                }
+            }
+            if(meilleure.getValeur()==22){
+                ok=true;
+            }
+            if(choisie.getValeur()==22){
+                ok=true;
+            }
+            return ok;
+        }
+        
+        public boolean possedePlusGrandAtout(int valeur){
+            boolean ok=false;
+            for(int i=0; i<main.size();i++){
+                if(main.get(i).getCouleur()==0){
+                    if(main.get(i).getValeur()>valeur&&main.get(i).getValeur()!=22){
+                        ok=true;
+                    }
+                }
+            }
+            return ok;
+        }
+        
+        public boolean possedeCouleur(int couleur){
+            boolean ok=false;
+             for(int i=0; i<main.size();i++){
+                 if(main.get(i).getCouleur()==couleur&&main.get(i).getValeur()!=22){
+                     ok=true;
+                 }
+             }
+             return ok;
+        } 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////        
 	public void afficherPoints(){
 		System.out.println(id+", vous avez "+score+" points.");
 	}
@@ -97,11 +175,12 @@ public class Joueur {
 	public int annoncer() {
 		afficherMain();
 		System.out.println("A vous de parler " + id + " :");
-		input = new Scanner(System.in);
-		return input.nextInt();// 0 pour rien 1 pour petite, 2 pour garde, 4
+		Scanner scan = new Scanner(System.in);
+                return scan.nextInt();
+                //return com.entreeAnnonce();// 0 pour rien 1 pour petite, 2 pour garde, 4
 								// pour garde sans et 6 pour garde contre
 	}
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public void prendreChien(Pioche pioche){
 		pioche.afficherChien();
 		main.addAll(pioche.getChien());
@@ -110,12 +189,19 @@ public class Joueur {
 		for(int i = 0; i<6; i++){
 			afficherMain();
 			System.out.println("Carte "+(i+1)+" dans le chien :");
-			input = new Scanner(System.in);
-			int rang = input.nextInt();
-			pioche.getChien().add(main.get(rang));
+			int rang = com.entreeCarte(this);
+                        Carte choisie=main.get(rang);
+                        while(choisie.getCouleur()==0&&(possedeCouleur(1)||possedeCouleur(2)||possedeCouleur(3)||possedeCouleur(4))){
+                            System.err.println("Pas d'atout dans le chien");
+                            rang = com.entreeCarte(this);
+                            choisie=main.get(rang);
+                        }
+			pioche.getChien().add(choisie);
 			main.remove(rang);
 		}
+                System.out.println("Le chien est fait !");
 	}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/*
 	 * public void distribuer(Joueur[] joueurs, Pioche pioche, int dealer){ int
 	 * nbchien=0; int ch=0; int j=1; boolean chi=false; switch(joueurs.length){
@@ -133,11 +219,11 @@ public class Joueur {
 	 * pioche.getPaquet().remove(0); chi=false; } } }
 	 */
 
-	public String getId() {
+	public Session getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Session id) {
 		this.id = id;
 	}
 
@@ -155,14 +241,6 @@ public class Joueur {
 
 	public void setScore(float f) {
 		this.score = f;
-	}
-
-	public Scanner getInput() {
-		return input;
-	}
-
-	public void setInput(Scanner input) {
-		this.input = input;
 	}
 
 }

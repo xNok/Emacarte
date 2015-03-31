@@ -33,17 +33,18 @@ public class TarotWSEndpoint {
     @OnOpen
     public void onOpen(final Session session, @PathParam("room") String room) throws IOException {      
         session.getUserProperties().put("room", room);
-        sessionHandler.addSession(session);
+        sessionHandler.addSession(session, room);
         
         sendMessage("Connecté salle : " + room, session);
         sendMessage(session.toString(), session);
-        sendMessage("Utilisateurs connectés : "  + session.getOpenSessions().size(), session);
+        sendMessage("Utilisateurs connectés à la plate-forme: "  + session.getOpenSessions().size(), session);
+        sendMessage("Utilisateurs connectés à la salle: "  + sessionHandler.getNbrSession(room), session);
     }
     
     @OnMessage
     public void onMessage(final Session session, String message) {       
         String room = (String) session.getUserProperties().get("room");
-        System.out.println("Nbr sessions :" + sessionHandler.getNbrSession());
+        System.out.println("Nbr sessions :" + sessionHandler.getNbrSession(room));
         for(Session s : session.getOpenSessions()){
             if(s.isOpen() && room.equals(s.getUserProperties().get("room"))){
                 try {
@@ -59,6 +60,7 @@ public class TarotWSEndpoint {
 
     @OnClose
     public void onClose (Session session) {
+        String room = (String) session.getUserProperties().get("room");
         System.out.println("Un utilisateur est déconnecté");
         sessionHandler.removeSession(session);
     }
@@ -68,8 +70,7 @@ public class TarotWSEndpoint {
         
     }
     
-    
-    public void sendMessage(String message, Session session) throws IOException{
+    public static void sendMessage(String message, Session session) throws IOException{
         session.getBasicRemote().sendText(message);
     }
     

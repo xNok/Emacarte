@@ -5,8 +5,8 @@
  */
 package fr.emacarte.servlet;
 
+import fr.emacarte.webApp.TarotSessionHandler;
 import java.io.IOException;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 public class GameServlet extends HttpServlet {
     
     public static String VUE = "/WEB-INF/game/homeGame.jsp" ;
-    public static ArrayList<String> salles = new ArrayList();
+    
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,8 +39,9 @@ public class GameServlet extends HttpServlet {
     }
     
     private void create(HttpServletRequest request, HttpServletResponse response) throws IOException{
-        salles.add(VUE);
-        response.sendRedirect("/Emacarte/jeux/salle_de_jeux?num=" + salles.size());
+        
+        TarotSessionHandler.createSalle();
+        response.sendRedirect("/Emacarte/jeux/salle_de_jeux?num=" + TarotSessionHandler.salles.size());
     }
     
     private void join(HttpServletRequest request, HttpServletResponse response){
@@ -65,10 +66,11 @@ public class GameServlet extends HttpServlet {
             throws ServletException, IOException {
         VUE = "/WEB-INF/game/homeGame.jsp";
         
+        //gestion des URI
         System.out.println("GET");
         String URI = request.getRequestURI();
         String[] s = URI.split("/");
-        if(s.length > 3){
+        if(s.length > 3){ //Uri longue => option différente
             System.out.println(s[3]);
             switch (s[3]){
                 case "create": 
@@ -81,9 +83,14 @@ public class GameServlet extends HttpServlet {
                     VUE = "/WEB-INF/game/salleGame.jsp";
                     salle(request, response);
                  break;
-                default : VUE = "/WEB-INF/game/homeGame.jsp";
+                default : 
+                    VUE = "/WEB-INF/game/homeGame.jsp";
              } 
+        }else{ //uri courte traitement normal
+            request.setAttribute("salles", TarotSessionHandler.salles.keySet().toArray()); 
         }
+        
+
         
         processRequest(request, response);
     }

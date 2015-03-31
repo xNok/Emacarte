@@ -5,7 +5,10 @@
 --%>
 <ul>
     <li><a href="jeux/create" >Créer une partie</a></li>
-    <li><a href="jeux/join" >Rejoindre une partie</a></li>
+    <c:out value="${ salles }" />
+    <c:forEach items="${ salles }" var="titre" varStatus="status">
+        <li><a href="jeux/salle_de_jeux?num=${ titre }" >Rejoindre la salle N° <c:out value="${ titre }" /></a></li>
+    </c:forEach>
 </ul>
 
 
