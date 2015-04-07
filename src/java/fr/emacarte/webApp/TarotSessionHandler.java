@@ -5,11 +5,7 @@
  */
 package fr.emacarte.webApp;
 
-import fr.emacarte.webApp.app.Tarot;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
 import javax.faces.bean.ApplicationScoped;
 import javax.websocket.Session;
 
@@ -31,14 +27,14 @@ public class TarotSessionHandler {
         Salle s = new Salle(String.valueOf(salles.size()+1));
         Thread t = new Thread(s);
         t.start();
-        salles.put(String.valueOf(salles.size()+1), s);  
+        salles.put(String.valueOf(salles.size()+1), s);
      }
     
     public void addSession(Session session, String room){
-        System.out.println("Un personne s'est connecté à la salle n°" + room + " totale: " + getNbrSession(room));
         sessions.put(session, room);
         Salle s = salles.get(room);
         s.addPlayer(session);
+        System.out.println("Un personne s'est connecté à la salle n°" + room + " totale: " + getNbrSession(room));
     }
     
     public void removeSession(Session session){        
@@ -56,7 +52,5 @@ public class TarotSessionHandler {
         System.out.println("Peronnes dans la salle n°" + room + "=" + s.getSize());
         return s.getSize();
     }
-    
-    
 
 }

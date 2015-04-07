@@ -7,6 +7,7 @@ package fr.emacarte.webApp;
 
 import fr.emacarte.webApp.app.Joueur;
 import fr.emacarte.webApp.app.Tarot;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,15 +23,17 @@ class Salle implements Runnable{
     public Tarot tarot;
     public String name;
     
+    public boolean run = true;
+    
     @Override
     public void run() {
-        while(true){
+        while(run){
             try {
                 Thread.sleep(10000);
             } catch (InterruptedException ex) {
                 Logger.getLogger(Salle.class.getName()).log(Level.SEVERE, null, ex);
             }
-            System.out.println("echo salle n°" + name);
+            System.out.println("echo salle n°" + name + " ;" + Thread.currentThread().toString());
         }
     }
 
@@ -41,12 +44,32 @@ class Salle implements Runnable{
 
     public void addPlayer(Session session) {
         players.add(session);
+        TarotWSEndpoint.sendAsyncMessage("Bienvenue", session);
         if(players.size() == 4){
             System.out.println("Il y a 4 joueurs dans la salle n°" + name);
-            Joueur[] joueurs = tarot.getJoueurs();
-            for (int i = 0; i < 4; i++) {
-                joueurs[i].setId(players.get(i));
+            try {
+                lancerPartie();
+            } catch (IOException ex) {
+                Logger.getLogger(Salle.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
+    }
+    
+    public void lancerPartie() throws IOException{       
+        Joueur[] joueurs = tarot.getJoueurs();
+        for (int i = 0; i < 4; i++) {
+            Session p = players.get(i);
+            TarotWSEndpoint.sendAsyncMessage("Nous sommes 4 la partie commence", p);
+            System.out.println(p);
+            joueurs[i] = new Joueur(p);
+        }
+ 
+        tarot.jouerPartie();
+    }
+    
+    public void broadcast(String message){
+        for (Session p:players) {
+            TarotWSEndpoint.sendAsyncMessage(message, p);
         }
     }
     

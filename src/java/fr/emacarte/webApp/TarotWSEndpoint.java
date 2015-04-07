@@ -33,12 +33,13 @@ public class TarotWSEndpoint {
     @OnOpen
     public void onOpen(final Session session, @PathParam("room") String room) throws IOException {      
         session.getUserProperties().put("room", room);
-        sessionHandler.addSession(session, room);
         
         sendMessage("Connecté salle : " + room, session);
         sendMessage(session.toString(), session);
         sendMessage("Utilisateurs connectés à la plate-forme: "  + session.getOpenSessions().size(), session);
         sendMessage("Utilisateurs connectés à la salle: "  + sessionHandler.getNbrSession(room), session);
+        
+        sessionHandler.addSession(session, room);
     }
     
     @OnMessage
@@ -72,6 +73,10 @@ public class TarotWSEndpoint {
     
     public static void sendMessage(String message, Session session) throws IOException{
         session.getBasicRemote().sendText(message);
+    }
+    
+    public static void sendAsyncMessage(String message, Session session){
+        session.getAsyncRemote().sendText(message);
     }
     
 }
