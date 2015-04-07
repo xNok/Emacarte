@@ -3,13 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Alexandre/Documents/NetBeansProjects/Emacarte/src/java/fr/emacarte/webApp/app/Tarot.java</file>
             <file>file:/C:/Users/Alexandre/Documents/NetBeansProjects/Emacarte/src/java/fr/emacarte/servlet/GameServlet.java</file>
+            <file>file:/C:/Users/Alexandre/Documents/NetBeansProjects/Emacarte/src/java/fr/emacarte/webApp/app/Tarot.java</file>
+            <file>file:/C:/Users/Alexandre/Documents/NetBeansProjects/Emacarte/src/java/fr/emacarte/webApp/app/Carte.java</file>
             <file>file:/C:/Users/Alexandre/Documents/NetBeansProjects/Emacarte/src/java/fr/emacarte/webApp/Salle.java</file>
             <file>file:/C:/Users/Alexandre/Documents/NetBeansProjects/Emacarte/src/java/fr/emacarte/webApp/TarotSessionHandler.java</file>
             <file>file:/C:/Users/Alexandre/Documents/NetBeansProjects/Emacarte/src/java/fr/emacarte/webApp/TarotWSEndpoint.java</file>
             <file>file:/C:/Users/Alexandre/Documents/NetBeansProjects/Emacarte/src/java/fr/emacarte/webApp/app/Communication.java</file>
             <file>file:/C:/Users/Alexandre/Documents/NetBeansProjects/Emacarte/src/java/fr/emacarte/webApp/app/Joueur.java</file>
+            <file>file:/C:/Users/Alexandre/Documents/NetBeansProjects/Emacarte/web/js/tarot.js</file>
         </group>
     </open-files>
 </project-private>

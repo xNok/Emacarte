@@ -36,27 +36,32 @@ public class TarotWSEndpoint {
         
         sendMessage("Connecté salle : " + room, session);
         sendMessage(session.toString(), session);
-        sendMessage("Utilisateurs connectés à la plate-forme: "  + session.getOpenSessions().size(), session);
-        sendMessage("Utilisateurs connectés à la salle: "  + sessionHandler.getNbrSession(room), session);
+        sendMessage("Utilisateurs connectés à la plate-forme: "  + (session.getOpenSessions().size()+1), session);
+        sendMessage("Utilisateurs connectés à la salle: "  + (sessionHandler.getNbrSession(room)+1), session);
         
+        session.getUserProperties().put("message", "");
         sessionHandler.addSession(session, room);
     }
     
     @OnMessage
     public void onMessage(final Session session, String message) {       
         String room = (String) session.getUserProperties().get("room");
-        System.out.println("Nbr sessions :" + sessionHandler.getNbrSession(room));
-        for(Session s : session.getOpenSessions()){
-            if(s.isOpen() && room.equals(s.getUserProperties().get("room"))){
-                try {
-                    if(!s.equals(session)){
-                        sendMessage(message, s);
-                    }     
-                } catch (IOException ex) {
-                    Logger.getLogger(TarotWSEndpoint.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        } 
+        System.out.println(message);
+        session.getUserProperties().put("message", message);
+                
+        
+//        System.out.println("Nbr sessions :" + sessionHandler.getNbrSession(room));
+//        for(Session s : session.getOpenSessions()){
+//            if(s.isOpen() && room.equals(s.getUserProperties().get("room"))){
+//                try {
+//                    if(!s.equals(session)){
+//                        sendMessage(message, s);
+//                    }     
+//                } catch (IOException ex) {
+//                    Logger.getLogger(TarotWSEndpoint.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//            }
+//        } 
     }
 
     @OnClose

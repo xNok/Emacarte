@@ -1,7 +1,9 @@
 package fr.emacarte.webApp.app;
 
+import fr.emacarte.webApp.TarotWSEndpoint;
 import java.util.ArrayList;
 import java.util.Scanner;
+import javax.websocket.Session;
 
 public class Tarot{
 
@@ -14,6 +16,12 @@ public class Tarot{
     ArrayList<Carte> opposants;
     Scanner input;
     boolean fin = false;
+    
+    public void broadcast(String message){
+        for (Joueur p:joueurs) {
+            TarotWSEndpoint.sendAsyncMessage(message, p.getId());
+        }
+    }
 
     public Tarot() {
         pioche = new Pioche();
@@ -41,11 +49,16 @@ public class Tarot{
         //pioche.afficherPaquet();
         distribuer(joueurs, pioche, manche % 4);
         int prem = (manche + 1) % 4;
+        
+        //tour d'annonce
         tourAnnonce(prem);
         if (annonce != 0) {
-            System.out.println("\u001B[32" + joueurs[preneur].getId() + " prend une " + annonce(annonce) + ".");
-            System.out.println("Commençons la manche." + "\u001B[0m");
-            System.out.println("");
+            //si ca marche on broadcast
+            broadcast("\u001B[32" + joueurs[preneur].getId() + " prend une " + annonce(annonce) + ".");
+            broadcast("Commençons la manche." + "\u001B[0m");
+            broadcast("");
+            
+            //trie de la main
             for (int i = prem; i < prem + 4; i++) {
                 joueurs[i % 4].trierMain();
                 if (joueurs[i % 4].getMain().get(17).getValeur() == 22) {
@@ -105,7 +118,7 @@ public class Tarot{
                     pointsNecessaires = 36;
                     break;
             }
-            System.out.println(joueurs[preneur].getId() + " a fait " + pointsFaits + " points pour " + pointsNecessaires + ".");
+            broadcast(joueurs[preneur].getId() + " a fait " + pointsFaits + " points pour " + pointsNecessaires + ".");
 
             joueurs[0].getMain().clear();
             joueurs[0].getMain().addAll(preneurs);
@@ -129,7 +142,7 @@ public class Tarot{
             pioche.getPaquet().addAll(preneurs);
             pioche.afficherPaquet();
         } else {
-            System.out.println("Tout le monde a passé.");
+            broadcast("Tout le monde a passé.");
             pioche.getPaquet().clear();
             pioche.getPaquet().addAll(pioche.getChien());
             pioche.getChien().clear();
@@ -184,9 +197,9 @@ public class Tarot{
         } else {
             opposants.addAll(levee);
         }
-        System.out.println("-------------------------------------------------------------------");
-        System.out.println("\u001B[33m" + joueurs[meilleur].getId() + " remporte la levée." + "\u001B[0m");
-        System.out.println("-------------------------------------------------------------------");
+        broadcast("-------------------------------------------------------------------");
+        broadcast("\u001B[33m" + joueurs[meilleur].getId() + " remporte la levée." + "\u001B[0m");
+        broadcast("-------------------------------------------------------------------");
         if(derniere==false){
             return meilleur;
         }else{
@@ -198,8 +211,8 @@ public class Tarot{
     public void jouerPartie() {
         int manche = 1;
         while (fin == false) {
-            System.out.println("");
-            System.out.println("Manche " + manche + " :");
+            broadcast("Manche : " + manche);
+            
             jouerManche(manche);
             manche += 1;
         }
@@ -251,7 +264,7 @@ public class Tarot{
                 joueurs[(dealer + j) % joueurs.length].getMain().add(
                         pioche.getPaquet().get(0));
                 pioche.getPaquet().remove(0);
-				// System.out.println(3*j+" cartes");
+				// broadcast(3*j+" cartes");
                 // pioche.afficherPaquet();
                 // pioche.afficherChien();
                 // joueurs[(dealer+j)%joueurs.length].afficherMain();

@@ -34,7 +34,7 @@ public class TarotSessionHandler {
         sessions.put(session, room);
         Salle s = salles.get(room);
         s.addPlayer(session);
-        System.out.println("Un personne s'est connecté à la salle n°" + room + " totale: " + getNbrSession(room));
+        System.out.println("Session ajouté à la salle n°" + room + " totale: " + getNbrSession(room));
     }
     
     public void removeSession(Session session){        

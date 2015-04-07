@@ -150,7 +150,7 @@ public class Carte {
 		System.out.println("");
 	}
 	
-	public void afficherCarteDansTas(){
+	public String afficherCarteDansTas(){
 		String coul="";
 		if(couleur==0){
 			coul="\u001B[34m";
@@ -161,11 +161,16 @@ public class Carte {
 		if(couleur==1||couleur==3){
 			coul="\u001B[30m";
 		}
+                String s = "";
 		if(couleur!=0){
-			System.out.print(coul+"("+imCouleur+","+imValeur+") "+"\u001B[0m");
+                        s= coul+"("+imCouleur+","+imValeur+") "+"\u001B[0m";
+			System.out.print(s);
 		}else{
-			System.out.print(coul+"("+imValeur+") "+"\u001B[0m");
+                        s = coul+"("+imValeur+") "+"\u001B[0m";
+			System.out.print(s);
 		}
+                
+                return s;
 	}
 
 	public int getCouleur() {

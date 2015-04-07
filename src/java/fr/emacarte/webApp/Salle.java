@@ -24,12 +24,19 @@ class Salle implements Runnable{
     public String name;
     
     public boolean run = true;
+    public boolean lancer = true;
     
     @Override
     public void run() {
         while(run){
             try {
-                Thread.sleep(10000);
+                Thread.sleep(1000);
+                if(players.size() == 4 && lancer){
+                    System.out.println("Il y a 4 joueurs dans la salle n°" + name);
+                    lancer = false;
+                    lancerPartie();
+
+                }
             } catch (InterruptedException ex) {
                 Logger.getLogger(Salle.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -45,17 +52,10 @@ class Salle implements Runnable{
     public void addPlayer(Session session) {
         players.add(session);
         TarotWSEndpoint.sendAsyncMessage("Bienvenue", session);
-        if(players.size() == 4){
-            System.out.println("Il y a 4 joueurs dans la salle n°" + name);
-            try {
-                lancerPartie();
-            } catch (IOException ex) {
-                Logger.getLogger(Salle.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+
     }
     
-    public void lancerPartie() throws IOException{       
+    public void lancerPartie(){       
         Joueur[] joueurs = tarot.getJoueurs();
         for (int i = 0; i < 4; i++) {
             Session p = players.get(i);

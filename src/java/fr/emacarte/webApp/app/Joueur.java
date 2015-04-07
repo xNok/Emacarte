@@ -1,7 +1,10 @@
 package fr.emacarte.webApp.app;
 
+import fr.emacarte.webApp.TarotWSEndpoint;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.websocket.Session;
 
 public class Joueur {
@@ -18,13 +21,52 @@ public class Joueur {
 	}
 
 	public void afficherMain() {
-		System.out.println("Main de " + id + " :");
+		TarotWSEndpoint.sendAsyncMessage("Main de " + id + " :",id);
 		for (int i = 0; i < main.size(); i++) {
-			main.get(i).afficherCarteDansTas();
+			TarotWSEndpoint.sendAsyncMessage(main.get(i).afficherCarteDansTas(), id);
 		}
-		System.out.println("");
 	}
+        
+        public String getMessage(){
+            String message = "";
+            while(message.equals("")){
+//                    TarotWSEndpoint.sendAsyncMessage("echo annonce ;" + Thread.currentThread().toString());
+//                    try {                            
+//                        Thread.sleep(500);
+//                    } catch (InterruptedException ex) {
+//                        Logger.getLogger(Joueur.class.getName()).log(Level.SEVERE, null, ex);
+//                    }
+                 message = (String) id.getUserProperties().get("message");
+            }
+            
+            return message;
+        }
 
+        public int entreeCarte(Joueur joueur) {
+            
+            int l = joueur.getMain().size();
+            
+            boolean ok = false;
+            int retour = 0;
+            boolean err = false;
+            while (ok == false) {
+                if (err == true) {
+                    System.err.println("entrez un entier possible, merci !");
+                }
+                err = true;
+                String message = getMessage();
+                id.getUserProperties().put(message, "");
+                
+                int val = Integer.parseInt(message);
+                    if (val >= 0 && val < l) {
+                        ok = true;
+                        retour = val;
+                    }
+                }
+            
+            return retour;
+        }
+        
 	public void trierMain() {
 		ArrayList<Carte> mainTriee = new ArrayList<Carte>();
 		ArrayList<Carte> coul1 = new ArrayList<Carte>();
@@ -83,7 +125,7 @@ public class Joueur {
 
 	public Carte poserCarte() {
 		afficherMain();
-		System.out.println("Veuillez poser une carte.");
+		TarotWSEndpoint.sendAsyncMessage("Veuillez poser une carte.",id);
 		int rang=com.entreeCarte(this);
 		Carte cartePosee = main.get(rang);
 		main.remove(rang);
@@ -93,7 +135,7 @@ public class Joueur {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////        
         public Carte poserCarte(Carte demande, Carte meilleure){
             afficherMain();
-		System.out.println("Veuillez poser une carte.");
+		TarotWSEndpoint.sendAsyncMessage("Veuillez poser une carte.",id);
 		int rang = com.entreeCarte(this);
 		Carte cartePosee = main.get(rang);
                 while(verifierCarte(demande,meilleure,cartePosee)==false){
@@ -169,16 +211,20 @@ public class Joueur {
         } 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////        
 	public void afficherPoints(){
-		System.out.println(id+", vous avez "+score+" points.");
+		TarotWSEndpoint.sendAsyncMessage(id+", vous avez "+score+" points.",id);
 	}
 
 	public int annoncer() {
 		afficherMain();
-		System.out.println("A vous de parler " + id + " :");
-		Scanner scan = new Scanner(System.in);
-                return scan.nextInt();
+		TarotWSEndpoint.sendAsyncMessage("A vous de jouer !", id);
+                
+                String message = getMessage();
+                id.getUserProperties().put(message, "");
+
                 //return com.entreeAnnonce();// 0 pour rien 1 pour petite, 2 pour garde, 4
 								// pour garde sans et 6 pour garde contre
+                
+                return Integer.parseInt(message);
 	}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public void prendreChien(Pioche pioche){
@@ -188,7 +234,7 @@ public class Joueur {
 		pioche.getChien().clear();
 		for(int i = 0; i<6; i++){
 			afficherMain();
-			System.out.println("Carte "+(i+1)+" dans le chien :");
+			TarotWSEndpoint.sendAsyncMessage("Carte "+(i+1)+" dans le chien :",id);
 			int rang = com.entreeCarte(this);
                         Carte choisie=main.get(rang);
                         while(choisie.getCouleur()==0&&(possedeCouleur(1)||possedeCouleur(2)||possedeCouleur(3)||possedeCouleur(4))){
@@ -199,7 +245,7 @@ public class Joueur {
 			pioche.getChien().add(choisie);
 			main.remove(rang);
 		}
-                System.out.println("Le chien est fait !");
+                TarotWSEndpoint.sendAsyncMessage("Le chien est fait !",id);
 	}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/*
