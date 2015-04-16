@@ -4,11 +4,17 @@
     Author     : Alexandre
 --%>
 
-<div id="output"></div>
+<div id="tapis" style="width: 50%; float: right; min-height: 100px">
+    
+</div>
+<div style="width: 50%">
+<div id="output" ></div>
 <form action="post">
     <input type="text" name="input" value="" id="input" />
     <input type="submit" value="Envoyer" id="submit"/>
 </form>
+</div>
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script>

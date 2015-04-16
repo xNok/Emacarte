@@ -2,8 +2,6 @@ package fr.emacarte.webApp.app;
 
 import fr.emacarte.webApp.TarotWSEndpoint;
 import java.util.ArrayList;
-import java.util.Scanner;
-import javax.websocket.Session;
 
 public class Tarot{
 
@@ -14,12 +12,11 @@ public class Tarot{
     int annonce = 0;
     ArrayList<Carte> preneurs;
     ArrayList<Carte> opposants;
-    Scanner input;
     boolean fin = false;
     
     public void broadcast(String message){
         for (Joueur p:joueurs) {
-            TarotWSEndpoint.sendAsyncMessage(message, p.getId());
+            TarotWSEndpoint.sendChatMessage(message, p.getId(), "red");
         }
     }
 

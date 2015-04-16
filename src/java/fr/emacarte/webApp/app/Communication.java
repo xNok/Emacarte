@@ -5,14 +5,21 @@
  */
 package fr.emacarte.webApp.app;
 
+import fr.emacarte.webApp.TarotWSEndpoint;
 import java.util.ArrayList;
-import java.util.Scanner;
+import javax.json.Json;
+import javax.json.JsonArrayBuilder;
+import javax.json.JsonObject;
+import javax.json.JsonObjectBuilder;
 
 /**
  *
  * @author Olivier
  */
 public class Communication {
+    
+    //correspondance action Java -> action JavaScript
+    public static final String envoyerMain = "afficherMain";
 
     private String connexion;
     private String server;
@@ -33,22 +40,21 @@ public class Communication {
     }
 
     public String envoyerMain(ArrayList<Carte> paquet) {
-        String retour = "";
-        retour += "{\"main\":{";
+        
+        JsonArrayBuilder main = Json.createArrayBuilder();
         for (int i = 0; i < paquet.size(); i++) {
-            if (i != 0) {
-                retour += ",";
-            }
-            retour += "\"carte";
-            retour += "" + (i + 1);
-            retour += "\":{\"couleur\":\"";
-            retour += Integer.toString(paquet.get(i).getCouleur());
-            retour += "\",\"valeur\":\"";
-            retour += Integer.toString(paquet.get(i).getValeur());
-            retour += "\"}";
+            main.add(Json.createObjectBuilder()
+                .add("couleur", paquet.get(i).getCouleur())
+                .add("valeur", paquet.get(i).getValeur())
+            );
         }
-        retour += "}}";
-        return retour;
+        
+        JsonObject jo = Json.createObjectBuilder()
+            .add("action", envoyerMain)
+            .add("main", main)
+        .build();
+        
+        return jo.toString();
     }
 
     public String envoyerChien(ArrayList<Carte> paquet) {
@@ -95,31 +101,30 @@ public class Communication {
     }
 
     public int entreeCarte(Joueur joueur) {
-        Scanner scan;
+
         int l = joueur.getMain().size();
         boolean ok = false;
         int retour = 0;
         boolean err = false;
         while (ok == false) {
             if (err == true) {
-                System.err.println("entrez un entier possible, merci !");
+                TarotWSEndpoint.sendAsyncMessage("entrez un entier possible, merci !", joueur.getId());
             }
             err = true;
-            scan = new Scanner(System.in);
-            if (scan.hasNextInt()) {
-                int val = scan.nextInt();
-                if (val >= 0 && val < l) {
-                    ok = true;
-                    retour = val;
-                }
+            String message = joueur.getMessage();
+            int val = Integer.parseInt(message);
+            ok = true;
+            
+            if (val >= 0 && val < l) {
+                ok = true;
+                retour = val;
             }
         }
 
         return retour;
     }
 
-    public int entreeAnnonce() {
-        Scanner scan;
+    public int entreeAnnonce(Joueur joueur) {
         boolean ok = false;
         int retour = 0;
         boolean err = false;
@@ -128,14 +133,12 @@ public class Communication {
                 System.err.println("entrez un entier possible, merci !");
             }
             err = true;
-            scan = new Scanner(System.in);
-            if (scan.hasNextInt()) {
-                int val = scan.nextInt();
+            String message = joueur.getMessage();
+            int val = Integer.parseInt(message);
                 if (val == 0 || val == 1 || val == 2 || val == 4 || val == 6) {
                     ok = true;
                     retour = val;
                 }
-            }
         }
         return retour;
     }

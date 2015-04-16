@@ -2,9 +2,6 @@ package fr.emacarte.webApp.app;
 
 import fr.emacarte.webApp.TarotWSEndpoint;
 import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.websocket.Session;
 
 public class Joueur {
@@ -21,10 +18,8 @@ public class Joueur {
 	}
 
 	public void afficherMain() {
-		TarotWSEndpoint.sendAsyncMessage("Main de " + id + " :",id);
-		for (int i = 0; i < main.size(); i++) {
-			TarotWSEndpoint.sendAsyncMessage(main.get(i).afficherCarteDansTas(), id);
-		}
+		TarotWSEndpoint.sendChatMessage("Votre main est prête :",id, "red");
+                TarotWSEndpoint.sendAsyncMessage(com.envoyerMain(main), id);
 	}
         
         public String getMessage(){
@@ -38,6 +33,7 @@ public class Joueur {
 //                    }
                  message = (String) id.getUserProperties().get("message");
             }
+            id.getUserProperties().put("message", "");
             
             return message;
         }
@@ -51,11 +47,11 @@ public class Joueur {
             boolean err = false;
             while (ok == false) {
                 if (err == true) {
-                    System.err.println("entrez un entier possible, merci !");
+                    TarotWSEndpoint.sendAsyncMessage("entrez un entier possible, merci !",id);
                 }
                 err = true;
                 String message = getMessage();
-                id.getUserProperties().put(message, "");
+                
                 
                 int val = Integer.parseInt(message);
                     if (val >= 0 && val < l) {
@@ -139,7 +135,7 @@ public class Joueur {
 		int rang = com.entreeCarte(this);
 		Carte cartePosee = main.get(rang);
                 while(verifierCarte(demande,meilleure,cartePosee)==false){
-                    System.err.println("Vous ne pouvez pas poser cette carte, choisissez-en une autre !");
+                    TarotWSEndpoint.sendAsyncMessage("Vous ne pouvez pas poser cette carte, choisissez-en une autre !",id);
                     rang=com.entreeCarte(this);
                     cartePosee = main.get(rang);
                 }
@@ -219,7 +215,6 @@ public class Joueur {
 		TarotWSEndpoint.sendAsyncMessage("A vous de jouer !", id);
                 
                 String message = getMessage();
-                id.getUserProperties().put(message, "");
 
                 //return com.entreeAnnonce();// 0 pour rien 1 pour petite, 2 pour garde, 4
 								// pour garde sans et 6 pour garde contre
@@ -238,7 +233,7 @@ public class Joueur {
 			int rang = com.entreeCarte(this);
                         Carte choisie=main.get(rang);
                         while(choisie.getCouleur()==0&&(possedeCouleur(1)||possedeCouleur(2)||possedeCouleur(3)||possedeCouleur(4))){
-                            System.err.println("Pas d'atout dans le chien");
+                            TarotWSEndpoint.sendAsyncMessage("Pas d'atout dans le chien",id);
                             rang = com.entreeCarte(this);
                             choisie=main.get(rang);
                         }

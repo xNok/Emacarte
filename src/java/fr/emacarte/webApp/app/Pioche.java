@@ -15,17 +15,17 @@ public class Pioche {
      */
 	public Pioche(){
 		paquet = new ArrayList<Carte>();
-        for (int i = 1; i < 23; i++) 
-        {
-            paquet.add(new Carte(0,i));
-        }
-        for (int i = 1; i<5; i++){
-        	for(int j = 1; j<15; j++){
-        		paquet.add(new Carte(i,j));
-        	}
-        }
-        Collections.shuffle(paquet);
-        chien = new ArrayList<Carte>();
+            for (int i = 1; i < 23; i++) 
+            {
+                paquet.add(new Carte(0,i));
+            }
+            for (int i = 1; i<5; i++){
+                    for(int j = 1; j<15; j++){
+                            paquet.add(new Carte(i,j));
+                    }
+            }
+            Collections.shuffle(paquet);
+            chien = new ArrayList<Carte>();
 	}
 	
 	/**
@@ -33,19 +33,15 @@ public class Pioche {
      * de test
      */
     public void afficherPaquet() {
-    	System.out.println("Paquet :");
     	for (int i = 0; i < paquet.size(); i++) {
-			paquet.get(i).afficherCarteDansTas();
-		}
-		System.out.println("");
+            paquet.get(i).afficherCarteDansTas();
+	}
     }
     
     public void afficherChien() {
-    	System.out.println("Voici le chien :");
     	for (int i = 0; i < chien.size(); i++) {
-			chien.get(i).afficherCarteDansTas();
-		}
-		System.out.println("");
+            chien.get(i).afficherCarteDansTas();
+	}
     }
     
 	

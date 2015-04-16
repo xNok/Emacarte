@@ -147,7 +147,6 @@ public class Carte {
 
 	public void afficherCarte() {
 		afficherCarteDansTas();
-		System.out.println("");
 	}
 	
 	public String afficherCarteDansTas(){
