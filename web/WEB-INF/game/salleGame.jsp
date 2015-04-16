@@ -3,9 +3,25 @@
     Created on : 17 mars 2015, 10:31:54
     Author     : Alexandre
 --%>
+<style>
+    .carte{
+        margin: 20px;
+        width: 30px;
+        height: 30px;
+        background-color: red;
+        float: left;
+        text-align: center;
+        vertical-align: middle;
+    }
+    
+    #depose{
+        min-height: 10px;
+        background-color: orange;
+    }
+</style>
 
 <div id="tapis" style="width: 50%; float: right; min-height: 100px">
-    
+    <div id="depose"></div>
 </div>
 <div style="width: 50%">
 <div id="output" ></div>

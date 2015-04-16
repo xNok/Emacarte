@@ -25,7 +25,7 @@ public class Joueur {
         public String getMessage(){
             String message = "";
             while(message.equals("")){
-//                    TarotWSEndpoint.sendAsyncMessage("echo annonce ;" + Thread.currentThread().toString());
+//                    TarotWSEndpoint.sendChatMessage("echo annonce ;" + Thread.currentThread().toString());
 //                    try {                            
 //                        Thread.sleep(500);
 //                    } catch (InterruptedException ex) {
@@ -47,7 +47,7 @@ public class Joueur {
             boolean err = false;
             while (ok == false) {
                 if (err == true) {
-                    TarotWSEndpoint.sendAsyncMessage("entrez un entier possible, merci !",id);
+                    TarotWSEndpoint.sendChatMessage("entrez un entier possible, merci !",id, "orange");
                 }
                 err = true;
                 String message = getMessage();
@@ -121,7 +121,7 @@ public class Joueur {
 
 	public Carte poserCarte() {
 		afficherMain();
-		TarotWSEndpoint.sendAsyncMessage("Veuillez poser une carte.",id);
+		TarotWSEndpoint.sendChatMessage("Veuillez poser une carte.",id, "red");
 		int rang=com.entreeCarte(this);
 		Carte cartePosee = main.get(rang);
 		main.remove(rang);
@@ -131,11 +131,11 @@ public class Joueur {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////        
         public Carte poserCarte(Carte demande, Carte meilleure){
             afficherMain();
-		TarotWSEndpoint.sendAsyncMessage("Veuillez poser une carte.",id);
+		TarotWSEndpoint.sendChatMessage("Veuillez poser une carte.",id, "red");
 		int rang = com.entreeCarte(this);
 		Carte cartePosee = main.get(rang);
                 while(verifierCarte(demande,meilleure,cartePosee)==false){
-                    TarotWSEndpoint.sendAsyncMessage("Vous ne pouvez pas poser cette carte, choisissez-en une autre !",id);
+                    TarotWSEndpoint.sendChatMessage("Vous ne pouvez pas poser cette carte, choisissez-en une autre !",id, "orange");
                     rang=com.entreeCarte(this);
                     cartePosee = main.get(rang);
                 }
@@ -207,12 +207,12 @@ public class Joueur {
         } 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////        
 	public void afficherPoints(){
-		TarotWSEndpoint.sendAsyncMessage(id+", vous avez "+score+" points.",id);
+		TarotWSEndpoint.sendChatMessage(id+", vous avez "+score+" points.",id);
 	}
 
 	public int annoncer() {
 		afficherMain();
-		TarotWSEndpoint.sendAsyncMessage("A vous de jouer !", id);
+		TarotWSEndpoint.sendChatMessage("A vous de jouer !", id);
                 
                 String message = getMessage();
 
@@ -229,18 +229,18 @@ public class Joueur {
 		pioche.getChien().clear();
 		for(int i = 0; i<6; i++){
 			afficherMain();
-			TarotWSEndpoint.sendAsyncMessage("Carte "+(i+1)+" dans le chien :",id);
+			TarotWSEndpoint.sendChatMessage("Carte "+(i+1)+" dans le chien :",id);
 			int rang = com.entreeCarte(this);
                         Carte choisie=main.get(rang);
                         while(choisie.getCouleur()==0&&(possedeCouleur(1)||possedeCouleur(2)||possedeCouleur(3)||possedeCouleur(4))){
-                            TarotWSEndpoint.sendAsyncMessage("Pas d'atout dans le chien",id);
+                            TarotWSEndpoint.sendChatMessage("Pas d'atout dans le chien",id);
                             rang = com.entreeCarte(this);
                             choisie=main.get(rang);
                         }
 			pioche.getChien().add(choisie);
 			main.remove(rang);
 		}
-                TarotWSEndpoint.sendAsyncMessage("Le chien est fait !",id);
+                TarotWSEndpoint.sendChatMessage("Le chien est fait !",id);
 	}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/*
