@@ -69,7 +69,7 @@ class Salle implements Runnable{
     
     public void broadcast(String message){
         for (Session p:players) {
-            TarotWSEndpoint.sendAsyncMessage(message, p);
+            TarotWSEndpoint.sendChatMessage(message, p);
         }
     }
     

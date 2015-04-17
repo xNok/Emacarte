@@ -5,6 +5,7 @@
  */
 package fr.emacarte.webApp;
 
+import fr.emacarte.webApp.app.Communication;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.logging.Level;
@@ -31,6 +32,9 @@ import javax.websocket.server.ServerEndpoint;
 @ServerEndpoint("/tarot/{room}")
 public class TarotWSEndpoint {
     
+    //Clefs utilisable pour le champ action
+    public static final String[] keys = {"chat", "jouerCarte", "annonce"};
+    
     @Inject
     private static final TarotSessionHandler sessionHandler = new TarotSessionHandler();  
 
@@ -43,20 +47,24 @@ public class TarotWSEndpoint {
         sendChatMessage("Utilisateurs connectés à la plate-forme: "  + (session.getOpenSessions().size()+1), session);
         sendChatMessage("Utilisateurs connectés à la salle: "  + (sessionHandler.getNbrSession(room)+1), session);
         
-        session.getUserProperties().put("message", "");
+        //initialisation des Clefs
+        for(String key : keys){
+            session.getUserProperties().put(key, "");
+        }
+        
         sessionHandler.addSession(session, room);
     }
     
     @OnMessage
     public void onMessage(final Session session, String message) {       
         String room = (String) session.getUserProperties().get("room");
-        System.out.println(message);
+        System.out.println("in : " + message);
                 
         JsonReader reader = Json.createReader(new StringReader(message));
         JsonObject jsonMessage = reader.readObject();
         
         String action = jsonMessage.getString("action");
-        System.out.println(action);
+        System.out.println("action :" + action);
         
         if ("chat".equals(action)) {
             //envoyer le message à tout les utilisateur de la salle
@@ -71,17 +79,21 @@ public class TarotWSEndpoint {
                     }
                 }
             } 
-        }else if("tarot".equals(action)){
+        }else if("jouerCarte".equals(action)){
             //les informations sont communiqué au joueur via la session
-            session.getUserProperties().put("message", message);
-        }  
+            String valeur = jsonMessage.getString("valeur");
+            session.getUserProperties().put(Communication.carteDepose, valeur);
+        }else if("annonce".equals(action)){
+            String valeur = jsonMessage.getString("valeur");
+            session.getUserProperties().put(Communication.annonce, valeur);
+        } 
     }
 
     @OnClose
     public void onClose (Session session) {
         String room = (String) session.getUserProperties().get("room");
         System.out.println("Un utilisateur est déconnecté");
-        sessionHandler.removeSession(session);
+        sessionHandler.removeSession(session, room);
     }
     
     @OnError
@@ -96,6 +108,7 @@ public class TarotWSEndpoint {
      * @throws IOException 
      */
     public static void sendMessage(String message, Session session) throws IOException{
+        System.out.println("out : " + message);
         session.getBasicRemote().sendText(message);
     }
     
@@ -105,7 +118,7 @@ public class TarotWSEndpoint {
      * @param session 
      */
     public static void sendAsyncMessage(String message, Session session){
-        System.out.println(message);
+        System.out.println("out : " + message);
         session.getAsyncRemote().sendText(message);
     }
     

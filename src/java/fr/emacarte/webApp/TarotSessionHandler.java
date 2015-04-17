@@ -37,10 +37,12 @@ public class TarotSessionHandler {
         System.out.println("Session ajouté à la salle n°" + room + " totale: " + getNbrSession(room));
     }
     
-    public void removeSession(Session session){        
+    public void removeSession(Session session, String room){        
         sessions.remove(session);
-        String s = sessions.get(session);
-        System.out.println("un joueur a quitté la salle n°" + s);
+        String se = sessions.get(session);
+        Salle s = salles.get(room);
+        s.removePlayer(session);
+        System.out.println("un joueur a quitté la salle n°" + se);
     }
     
     public int getNbrSession(){

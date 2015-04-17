@@ -23,8 +23,9 @@ public class Joueur {
 	}
         
         public String getMessage(){
+            System.out.println("GetMessage");
             String message = "";
-            while(message.equals("")){
+            while(message.isEmpty()){
 //                    TarotWSEndpoint.sendChatMessage("echo annonce ;" + Thread.currentThread().toString());
 //                    try {                            
 //                        Thread.sleep(500);
@@ -37,30 +38,22 @@ public class Joueur {
             
             return message;
         }
-
-        public int entreeCarte(Joueur joueur) {
+        
+        public String getMessage(String key){
+            System.out.println("GetMessage " + key );
+            String message = "";
+            while(message.isEmpty()){
+//                    TarotWSEndpoint.sendChatMessage("echo annonce ;" + Thread.currentThread().toString());
+//                    try {                            
+//                        Thread.sleep(500);
+//                    } catch (InterruptedException ex) {
+//                        Logger.getLogger(Joueur.class.getName()).log(Level.SEVERE, null, ex);
+//                    }
+                 message = (String) id.getUserProperties().get(key);
+            }
+            id.getUserProperties().put(key, "");
             
-            int l = joueur.getMain().size();
-            
-            boolean ok = false;
-            int retour = 0;
-            boolean err = false;
-            while (ok == false) {
-                if (err == true) {
-                    TarotWSEndpoint.sendChatMessage("entrez un entier possible, merci !",id, "orange");
-                }
-                err = true;
-                String message = getMessage();
-                
-                
-                int val = Integer.parseInt(message);
-                    if (val >= 0 && val < l) {
-                        ok = true;
-                        retour = val;
-                    }
-                }
-            
-            return retour;
+            return message;
         }
         
 	public void trierMain() {
@@ -212,14 +205,14 @@ public class Joueur {
 
 	public int annoncer() {
 		afficherMain();
-		TarotWSEndpoint.sendChatMessage("A vous de jouer !", id);
+		TarotWSEndpoint.sendChatMessage("A vous de parler !", id);
                 
-                String message = getMessage();
+                int annonce = com.entreeAnnonce(this);
 
                 //return com.entreeAnnonce();// 0 pour rien 1 pour petite, 2 pour garde, 4
 								// pour garde sans et 6 pour garde contre
                 
-                return Integer.parseInt(message);
+                return annonce;
 	}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public void prendreChien(Pioche pioche){

@@ -15,13 +15,31 @@
     }
     
     #depose{
-        min-height: 10px;
-        background-color: orange;
+        min-height: 40px;
+    }
+    #annonces{
+        width: 100%;
+        background-color: aliceblue;
+        min-height: 70px;
+        display: none;
+    }
+    .annonce{
+        display: inline-block;
+        float: left;
+        background-color: chocolate;
+        height: 30px;
+        margin: 20px;
     }
 </style>
 
 <div id="tapis" style="width: 50%; float: right; min-height: 100px">
     <div id="depose"></div>
+    <div id="annonces">
+        <div class="annonce" idannonce="0"><span>Passer</span></div>
+        <div class="annonce" idannonce="1"><span>Petite</span></div>
+        <div class="annonce" idannonce="2"><span>Garde Sans</span></div>
+        <div class="annonce" idannonce="4"><span>Barde Contre</span></div>
+    </div>
 </div>
 <div style="width: 50%">
 <div id="output" ></div>

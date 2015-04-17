@@ -20,6 +20,8 @@ public class Communication {
     
     //correspondance action Java -> action JavaScript
     public static final String envoyerMain = "afficherMain";
+    public static final String carteDepose = "carteDepose";
+    public static final String annonce = "annonce";
 
     private String connexion;
     private String server;
@@ -39,11 +41,17 @@ public class Communication {
         return retour;
     }
 
+    /**
+     * Encoyer la main au format Json
+     * @param paquet
+     * @return Main to Json
+     */
     public String envoyerMain(ArrayList<Carte> paquet) {
         
         JsonArrayBuilder main = Json.createArrayBuilder();
         for (int i = 0; i < paquet.size(); i++) {
             main.add(Json.createObjectBuilder()
+                .add("idcarte",i)    
                 .add("couleur", paquet.get(i).getCouleur())
                 .add("valeur", paquet.get(i).getValeur())
             );
@@ -101,7 +109,7 @@ public class Communication {
     }
 
     public int entreeCarte(Joueur joueur) {
-
+        System.out.println("Com : entrer cartes");
         int l = joueur.getMain().size();
         boolean ok = false;
         int retour = 0;
@@ -111,7 +119,7 @@ public class Communication {
                 TarotWSEndpoint.sendAsyncMessage("entrez un entier possible, merci !", joueur.getId());
             }
             err = true;
-            String message = joueur.getMessage();
+            String message = joueur.getMessage(carteDepose);
             int val = Integer.parseInt(message);
             ok = true;
             
@@ -125,15 +133,19 @@ public class Communication {
     }
 
     public int entreeAnnonce(Joueur joueur) {
+        System.out.println("Com : entrer annonce");
         boolean ok = false;
         int retour = 0;
         boolean err = false;
         while (ok == false) {
             if (err == true) {
-                System.err.println("entrez un entier possible, merci !");
+                TarotWSEndpoint.sendChatMessage("entrez un entier possible, merci !", joueur.getId(), "orange");
             }
+            
+            //on récupère l'annonce
             err = true;
-            String message = joueur.getMessage();
+            String message = joueur.getMessage(annonce);
+            
             int val = Integer.parseInt(message);
                 if (val == 0 || val == 1 || val == 2 || val == 4 || val == 6) {
                     ok = true;
