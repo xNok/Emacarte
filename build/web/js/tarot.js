@@ -1,4 +1,5 @@
 (function($){
+    
 $(document).ready(function(){ 
 
 //variables Globales
@@ -53,7 +54,7 @@ function writeToScreen(message) {
 //---------------evènement---------------\\
 
 //message dans la chat
-    $("#submit").click(function(e){
+$("#submit").click(function(e){
         e.preventDefault(); //annule l'action d'envoi du formulaire
         var input = $('#input').val();
         writeToScreen('<span style="color: red;">'+input+'</span>');
@@ -76,6 +77,9 @@ $('.annonce').click(function(){
         valeur: $(this).attr('idannonce')
     };
     
+    //masquer la panneau d'annonce
+    $('#annonces').hide();
+    
     sendText(JSON.stringify(message));  
 });
 
@@ -92,6 +96,9 @@ var carteDepose;
 function afficherMain(main){
     alert("afficherMain");
     
+    //on vide le tapis précédent
+    $('#tapis').empty();
+    
     //on affiche le tapis et la dépose
     $('#tapis').css("background-color", "#F0FFF0");
     $("#depose").css("background-color", "#FFE13C");
@@ -99,11 +106,10 @@ function afficherMain(main){
     //affiche des cartes
     $.each(main, function(i, item) {
         $('#tapis').append(
-                "<div class=\"carte\" couleur=\""+ item.couleur +"\" valeur=\""+ item.valeur +"\">"
+                "<div class=\"carte\" couleur=\""+ item.couleur +"\" valeur=\""+ item.valeur +"\" idcarte=\""+ i +"\">"
                 + "<span>" + item.couleur +";"+ item.valeur + "</span>" +
                 "</div>"
         );
-        console.log(item.couleur +";"+ item.valeur);
     });
     
     //mise à jours, enregistrement de l'évènement pour les cartes
@@ -145,7 +151,7 @@ function jouerCarte(idcarte, valeur, couleur, carte){
     //envoi du message à l'appli
     var message = {
         action: "jouerCarte",
-        valeur: idCarte
+        valeur: idcarte
     };
     
     sendText(JSON.stringify(message));     
@@ -159,6 +165,7 @@ function afficherAnnonce(){
 }
 
 });
+
 })(jQuery);
 
 

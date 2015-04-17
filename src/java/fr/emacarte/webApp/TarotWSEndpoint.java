@@ -33,7 +33,7 @@ import javax.websocket.server.ServerEndpoint;
 public class TarotWSEndpoint {
     
     //Clefs utilisable pour le champ action
-    public static final String[] keys = {"chat", "jouerCarte", "annonce"};
+    public static final String[] keys = {"chat", "carteDepose", "annonce"};
     
     @Inject
     private static final TarotSessionHandler sessionHandler = new TarotSessionHandler();  
@@ -67,6 +67,7 @@ public class TarotWSEndpoint {
         System.out.println("action :" + action);
         
         if ("chat".equals(action)) {
+            System.out.println("action validated : chat");
             //envoyer le message à tout les utilisateur de la salle
             for(Session s : session.getOpenSessions()){
                 if(s.isOpen() && room.equals(s.getUserProperties().get("room"))){
@@ -80,10 +81,12 @@ public class TarotWSEndpoint {
                 }
             } 
         }else if("jouerCarte".equals(action)){
+            System.out.println("action validated : jouerCarte");
             //les informations sont communiqué au joueur via la session
             String valeur = jsonMessage.getString("valeur");
             session.getUserProperties().put(Communication.carteDepose, valeur);
         }else if("annonce".equals(action)){
+            System.out.println("action validated : annonce");
             String valeur = jsonMessage.getString("valeur");
             session.getUserProperties().put(Communication.annonce, valeur);
         } 

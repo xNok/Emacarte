@@ -7,7 +7,6 @@ package fr.emacarte.webApp;
 
 import fr.emacarte.webApp.app.Joueur;
 import fr.emacarte.webApp.app.Tarot;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -59,18 +58,12 @@ class Salle implements Runnable{
         Joueur[] joueurs = tarot.getJoueurs();
         for (int i = 0; i < 4; i++) {
             Session p = players.get(i);
-            TarotWSEndpoint.sendAsyncMessage("Nous sommes 4 la partie commence", p);
+            TarotWSEndpoint.sendChatMessage("Nous sommes 4 la partie commence", p);
             System.out.println(p);
             joueurs[i] = new Joueur(p);
         }
  
         tarot.jouerPartie();
-    }
-    
-    public void broadcast(String message){
-        for (Session p:players) {
-            TarotWSEndpoint.sendChatMessage(message, p);
-        }
     }
     
     public void removePlayer(Session session) {

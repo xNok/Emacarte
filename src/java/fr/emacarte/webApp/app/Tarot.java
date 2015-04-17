@@ -15,8 +15,9 @@ public class Tarot{
     boolean fin = false;
     
     public void broadcast(String message){
+        System.out.println("broadcast : " + message);
         for (Joueur p:joueurs) {
-            TarotWSEndpoint.sendChatMessage(message, p.getId(), "red");
+            TarotWSEndpoint.sendChatMessage(message, p.getId());
         }
     }
 
@@ -28,6 +29,7 @@ public class Tarot{
     }
 
     public void tourAnnonce(int prem) {
+        System.out.println("Tarot : tourAnnonce");
         annonce = 0;
         for (int i = prem; i < prem + joueurs.length; i++) {
             int a = joueurs[i % joueurs.length].annoncer();
@@ -39,7 +41,10 @@ public class Tarot{
     }
 
     public void jouerManche(int manche) {
+        System.out.println("Tarot : jouerManche");
         int excuse = 10;
+        
+        //netoyage
         opposants.clear();
         preneurs.clear();
         pioche.getChien().clear();
@@ -50,10 +55,10 @@ public class Tarot{
         //tour d'annonce
         tourAnnonce(prem);
         if (annonce != 0) {
+            System.out.println("Tarot : jouerManche annonce!=0");
             //si ca marche on broadcast
-            broadcast("\u001B[32" + joueurs[preneur].getId() + " prend une " + annonce(annonce) + ".");
-            broadcast("Commençons la manche." + "\u001B[0m");
-            broadcast("");
+            broadcast(joueurs[preneur].getId() + " prend une " + annonce(annonce) + ".");
+            broadcast("Commençons la manche.");
             
             //trie de la main
             for (int i = prem; i < prem + 4; i++) {

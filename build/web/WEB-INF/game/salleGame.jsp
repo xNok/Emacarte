@@ -14,8 +14,14 @@
         vertical-align: middle;
     }
     
+    #JeuContainer{
+        float: right;
+        width: 50%;
+    }
+    
     #depose{
         min-height: 40px;
+        width: 100%;
     }
     #annonces{
         width: 100%;
@@ -30,9 +36,20 @@
         height: 30px;
         margin: 20px;
     }
+    #tapis{
+        min-height: 100px;
+    }
+    #chat{
+        width: 50%;
+        float: left;
+    }
+    #output{
+        max-height: 800px;
+        overflow: scroll;
+    }
 </style>
 
-<div id="tapis" style="width: 50%; float: right; min-height: 100px">
+<div id="JeuContainer">
     <div id="depose"></div>
     <div id="annonces">
         <div class="annonce" idannonce="0"><span>Passer</span></div>
@@ -40,13 +57,15 @@
         <div class="annonce" idannonce="2"><span>Garde Sans</span></div>
         <div class="annonce" idannonce="4"><span>Barde Contre</span></div>
     </div>
+    <div id="tapis"></div>
 </div>
-<div style="width: 50%">
-<div id="output" ></div>
-<form action="post">
-    <input type="text" name="input" value="" id="input" />
-    <input type="submit" value="Envoyer" id="submit"/>
-</form>
+
+<div id="chat">
+    <div id="output" ></div>
+    <form action="post">
+        <input type="text" name="input" value="" id="input" />
+        <input type="submit" value="Envoyer" id="submit"/>
+    </form>
 </div>
 
 

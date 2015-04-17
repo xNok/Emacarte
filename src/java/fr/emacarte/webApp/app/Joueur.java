@@ -36,23 +36,26 @@ public class Joueur {
             }
             id.getUserProperties().put("message", "");
             
+            System.out.println("end : getMessage");
             return message;
         }
         
         public String getMessage(String key){
             System.out.println("GetMessage " + key );
             String message = "";
-            while(message.isEmpty()){
+            while(message.equals("")){
 //                    TarotWSEndpoint.sendChatMessage("echo annonce ;" + Thread.currentThread().toString());
 //                    try {                            
 //                        Thread.sleep(500);
 //                    } catch (InterruptedException ex) {
 //                        Logger.getLogger(Joueur.class.getName()).log(Level.SEVERE, null, ex);
 //                    }
+  
                  message = (String) id.getUserProperties().get(key);
             }
             id.getUserProperties().put(key, "");
             
+            System.out.println("end : getMessage " + key);
             return message;
         }
         

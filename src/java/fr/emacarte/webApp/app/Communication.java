@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
 import javax.json.JsonObject;
-import javax.json.JsonObjectBuilder;
 
 /**
  *
@@ -116,7 +115,7 @@ public class Communication {
         boolean err = false;
         while (ok == false) {
             if (err == true) {
-                TarotWSEndpoint.sendAsyncMessage("entrez un entier possible, merci !", joueur.getId());
+                TarotWSEndpoint.sendChatMessage("entrez un entier possible, merci !", joueur.getId());
             }
             err = true;
             String message = joueur.getMessage(carteDepose);
@@ -129,6 +128,7 @@ public class Communication {
             }
         }
 
+        System.out.println("end : entrer carte");
         return retour;
     }
 
@@ -152,6 +152,8 @@ public class Communication {
                     retour = val;
                 }
         }
+        
+        System.out.println("end : entrer annonce");
         return retour;
     }
 }
