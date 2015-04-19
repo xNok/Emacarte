@@ -7,11 +7,68 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>EmaCarte</title>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>EMACarte</title>
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Righteous">
+
+    <!-- Bootstrap -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <header>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav navbar-left">
+      <li>
+        <img src="img/logo_site.png" class="logo">
+        <img src="img/fond_logo.png" class="fond-logo">
+      </li>
+    </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="bouton"><a href="accueil.jsp">Nouveautés</a></li>
+        <li class="bouton"><a href="jeux.jsp">Jeux</a></li>
+        <li class="bouton"><a href="profil.jsp">Profil</a></li>
+        <li class="bouton"><a href="contact.jsp">Contact</a></li>
+        <li>
+          <img src="img/EMA_credit.png" class="credit">
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+      <div class=" navmob">
+      <div class="ptitrucbleu"></div>
+      <img src="img/logo_site.png" class="logomob">
+      
+        <div class="boutonmob">
+          <a href="#">Profil</a>
+        </div>
+        <div class="boutonmob">
+          <a href="#">Jeux</a>
+        </div>
+        <div class="boutonmob">
+          <a href="#">Stats</a>
+        </div>
+        <div class="boutonmobbas">
+          <a href="#">Tchat</a>
+        </div>
+        <div class="ptitrucdubas">
+      </div>
+</header>
+  <div class="tchat">
+    <form id="text" action=""><input type="text" class="text"></form>
+    <img src="img/tchatbout.jpg" href="profil.jsp" class="imgtchat">
+  </div>
 
