@@ -47,26 +47,47 @@
         max-height: 800px;
         overflow: scroll;
     }
+    .selected{
+        background-color: #2989d8;
+    }
 </style>
 
-<div id="JeuContainer">
-    <div id="depose"></div>
-    <div id="annonces">
-        <div class="annonce" idannonce="0"><span>Passer</span></div>
-        <div class="annonce" idannonce="1"><span>Petite</span></div>
-        <div class="annonce" idannonce="2"><span>Garde Sans</span></div>
-        <div class="annonce" idannonce="4"><span>Barde Contre</span></div>
+<%-- 
+    Document   : accueil
+    Created on : 7 avr. 2015, 10:47:47
+    Author     : Setra
+--%>
+<div class="corps">
+  <div class=container>
+    <div  class="row">
+      <div class="col-md-1">
+      </div>
+      <div class="col-md-11">
+        <div class="col-md-12">
+            <div id="JeuContainer">
+               <div id="annonces">
+                   <div class="annonce" idannonce="0"><span>Passer</span></div>
+                   <div class="annonce" idannonce="1"><span>Petite</span></div>
+                   <div class="annonce" idannonce="2"><span>Garde Sans</span></div>
+                   <div class="annonce" idannonce="4"><span>Barde Contre</span></div>
+               </div>
+               <div id="tapis"></div>
+           </div>
+           <div id="chat">
+               <div id="output" ></div>
+               <form action="post">
+                   <input type="text" name="input" value="" id="input" />
+                   <input type="submit" value="Envoyer" id="submit"/>
+               </form>
+           </div>
+        </div>
+      </div>
     </div>
-    <div id="tapis"></div>
+  </div>
 </div>
 
-<div id="chat">
-    <div id="output" ></div>
-    <form action="post">
-        <input type="text" name="input" value="" id="input" />
-        <input type="submit" value="Envoyer" id="submit"/>
-    </form>
-</div>
+
+
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>

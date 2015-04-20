@@ -44,6 +44,14 @@
         <servlet-name>ProfileServlet</servlet-name>
         <servlet-class>fr.emacarte.servlet.ProfileServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>NewsServlet</servlet-name>
+        <servlet-class>fr.emacarte.servlet.NewsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ContactServlet</servlet-name>
+        <servlet-class>fr.emacarte.servlet.ContactServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UserHomeServlet</servlet-name>
         <url-pattern>/membre/home</url-pattern>
@@ -61,19 +69,27 @@
         <url-pattern>/connexion</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>HomeServlet</servlet-name>
-        <url-pattern>/home</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ProfileServlet</servlet-name>
-        <url-pattern>/profile</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>GameServlet</servlet-name>
         <url-pattern>/jeux/join</url-pattern>
         <url-pattern>/jeux</url-pattern>
         <url-pattern>/jeux/salle_de_jeux</url-pattern>
         <url-pattern>/jeux/create</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProfileServlet</servlet-name>
+        <url-pattern>/profil</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HomeServlet</servlet-name>
+        <url-pattern>/accueil</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>NewsServlet</servlet-name>
+        <url-pattern>/nouveautes</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ContactServlet</servlet-name>
+        <url-pattern>/contact</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
@@ -81,7 +97,7 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>index.html</welcome-file>
+        <welcome-file>accueil</welcome-file>
     </welcome-file-list>
     <jsp-config>
         <jsp-property-group>

@@ -16,7 +16,7 @@
     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Righteous">
 
     <!-- Bootstrap -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="/Emacarte/css/style.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -37,10 +37,12 @@
       </li>
     </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li class="bouton"><a href="accueil.jsp">Nouveautés</a></li>
-        <li class="bouton"><a href="jeux.jsp">Jeux</a></li>
-        <li class="bouton"><a href="profil.jsp">Profil</a></li>
-        <li class="bouton"><a href="contact.jsp">Contact</a></li>
+        <li class="bouton"><a href="/Emacarte/nouveautes">Nouveautés</a></li>
+        <%-- <c:if test="${ !empty sessionScope.pseudo }"> --%>
+            <li class="bouton"><a href="/Emacarte/jeux">Jeux</a></li>
+            <li class="bouton"><a href="/Emacarte/profil">Profil</a></li>
+        <%-- </c:if> --%>
+        <li class="bouton"><a href="/Emacarte/contact">Contact</a></li>
         <li>
           <img src="img/EMA_credit.png" class="credit">
         </li>

@@ -29,6 +29,8 @@ function onMessage(e){
         writeToScreen('<span style="color: '+ message.color +';">'+message.message+'</span>');
     }else if(message.action === "afficherMain"){
         afficherMain(message.main);
+    }else if(message.action === "annonce"){
+        afficherAnnonce();
     }  
 }
 function onClose(e){
@@ -99,9 +101,8 @@ function afficherMain(main){
     //on vide le tapis précédent
     $('#tapis').empty();
     
-    //on affiche le tapis et la dépose
+    //on affiche le tapis
     $('#tapis').css("background-color", "#F0FFF0");
-    $("#depose").css("background-color", "#FFE13C");
     
     //affiche des cartes
     $.each(main, function(i, item) {
@@ -121,9 +122,6 @@ function afficherMain(main){
       var couleur = carte.attr("couleur");
       jouerCarte(idcarte, valeur, couleur, carte );      
     });
-    
-    //afficher les annonces
-    afficherAnnonce();
 }
 /**
  * 
@@ -138,12 +136,12 @@ function jouerCarte(idcarte, valeur, couleur, carte){
     
     //la dépose n'est pas vide
     if(carteDepose){
-        $('tapis').append(carteDepose);
+        carteDepose.toggleClass("selected");
     }
     
     
     carteDepose = carte;    
-    $("#depose").append(carte.clone());
+    carteDepose.toggleClass("selected");
     
     //achiche une messag edans la console
     writeToScreen('<span style="color: green;">Carte jouée</span>');

@@ -5,7 +5,7 @@
  */
 package fr.emacarte.servlet;
 
-import static fr.emacarte.servlet.ContactServlet.GET;
+import static fr.emacarte.servlet.ConnexionServlet.GET;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -17,9 +17,9 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Alexandre
  */
-public class ConnexionServlet extends HttpServlet {
+public class NewsServlet extends HttpServlet {
     
-    public static final String GET = "/WEB-INF/connexion.jsp";
+    public static final String GET = "/WEB-INF/nouveaute.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,7 +32,7 @@ public class ConnexionServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+       this.getServletContext().getRequestDispatcher( GET ).forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -47,7 +47,7 @@ public class ConnexionServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        this.getServletContext().getRequestDispatcher( GET ).forward(request, response);
+        processRequest(request, response);
     }
 
     /**

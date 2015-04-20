@@ -210,6 +210,12 @@ public class Joueur {
 		afficherMain();
 		TarotWSEndpoint.sendChatMessage("A vous de parler !", id);
                 
+                String json = "{"
+                    + "\"action\": \"annonce\""
+                    + "}"
+                ;
+                TarotWSEndpoint.sendAsyncMessage(json, id);
+                
                 int annonce = com.entreeAnnonce(this);
 
                 //return com.entreeAnnonce();// 0 pour rien 1 pour petite, 2 pour garde, 4

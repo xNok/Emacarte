@@ -200,7 +200,7 @@ public class Tarot{
             opposants.addAll(levee);
         }
         broadcast("-------------------------------------------------------------------");
-        broadcast("\u001B[33m" + joueurs[meilleur].getId() + " remporte la levée." + "\u001B[0m");
+        broadcast(joueurs[meilleur].getId() + " remporte la levée.");
         broadcast("-------------------------------------------------------------------");
         if(derniere==false){
             return meilleur;
