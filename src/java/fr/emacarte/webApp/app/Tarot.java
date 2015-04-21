@@ -2,6 +2,8 @@ package fr.emacarte.webApp.app;
 
 import fr.emacarte.webApp.TarotWSEndpoint;
 import java.util.ArrayList;
+import javax.json.Json;
+import javax.json.JsonObject;
 
 public class Tarot{
 
@@ -18,6 +20,13 @@ public class Tarot{
         System.out.println("broadcast : " + message);
         for (Joueur p:joueurs) {
             TarotWSEndpoint.sendChatMessage(message, p.getId());
+        }
+    }
+    
+    public void broadcastInfo(String message){
+        System.out.println("broadcast : " + message);
+        for (Joueur p:joueurs) {
+            TarotWSEndpoint.sendAsyncMessage(message, p.getId());
         }
     }
 
@@ -160,18 +169,41 @@ public class Tarot{
     }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    public void afficherLevee(Carte cartePosee){
+        //afficher la carte joué a tout les joueurs
+        JsonObject jo = Json.createObjectBuilder()
+            .add("action", Communication.afficherLevee)
+            .add("carte", Json.createObjectBuilder()
+                .add("couleur", cartePosee.getCouleur())
+                .add("valeur", cartePosee.getValeur())
+            )
+        .build();
+                
+        broadcastInfo(jo.toString());
+    }
+    
     public int jouerLevee(int prem, boolean derniere) {
         ArrayList<Carte> levee = new ArrayList<Carte>();
         int excuse=10;
         int meilleur = prem;
         Carte ouverture = joueurs[prem].poserCarte();
+        
+        //affichage
+        afficherLevee(ouverture);
         levee.add(ouverture);
         Carte meilleure = ouverture;
+        
         if(ouverture.getValeur()==22){
             excuse=prem;
         }
+        
+        //boucle pour les autre joueurs
         for (int i = prem + 1; i < prem + 4; i++) {
             Carte suivante = joueurs[i % 4].poserCarte(ouverture, meilleure);
+            
+            //affichage
+            afficherLevee(ouverture);
+            
             levee.add(suivante);
             if(suivante.getValeur()==22){
                 excuse=i%4;
