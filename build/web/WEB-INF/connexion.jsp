@@ -22,6 +22,7 @@
           </label>
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Connexion</button>
+        <button class="btn btn-lg btn-primary btn-block" href="/Emacarte/inscription">Inscription</button>
       </form>
       </div>
       <div class="col-md-4">
