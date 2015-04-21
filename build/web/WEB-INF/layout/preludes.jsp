@@ -32,8 +32,8 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     <ul class="nav navbar-nav navbar-left">
       <li>
-        <img src="img/logo_site.png" class="logo">
-        <img src="img/fond_logo.png" class="fond-logo">
+          <a href="/Emacarte/accueil"><img src="/Emacarte/img/logo_site.png" class="logo"></a>
+        <img src="/Emacarte/img/fond_logo.png" class="fond-logo">
       </li>
     </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -44,7 +44,7 @@
         <%-- </c:if> --%>
         <li class="bouton"><a href="/Emacarte/contact">Contact</a></li>
         <li>
-          <img src="img/EMA_credit.png" class="credit">
+          <img src="/Emacarte/img/EMA_credit.png" class="credit">
         </li>
       </ul>
     </div>
@@ -52,10 +52,10 @@
 </nav>
       <div class=" navmob">
       <div class="ptitrucbleu"></div>
-      <img src="img/logo_site.png" class="logomob">
+      <img src="/Emacarte/img/logo_site.png" class="logomob">
       
         <div class="boutonmob">
-          <a href="#">Profil</a>
+          <a href="/Emacarte/profil">Profil</a>
         </div>
         <div class="boutonmob">
           <a href="#">Jeux</a>
@@ -71,6 +71,6 @@
 </header>
   <div class="tchat">
     <form id="text" action=""><input type="text" class="text"></form>
-    <img src="img/tchatbout.jpg" href="profil.jsp" class="imgtchat">
+    <img src="/Emacarte/img/tchatbout.jpg" href="/Emacarte/profil" class="imgtchat">
   </div>
 
