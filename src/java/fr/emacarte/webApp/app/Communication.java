@@ -21,6 +21,7 @@ public class Communication {
     public static final String envoyerMain = "afficherMain";
     public static final String carteDepose = "carteDepose";
     public static final String annonce = "annonce";
+    public static final String afficherLevee = "afficherLevee";
 
     private String connexion;
     private String server;

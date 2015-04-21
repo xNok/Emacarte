@@ -31,6 +31,8 @@ function onMessage(e){
         afficherMain(message.main);
     }else if(message.action === "annonce"){
         afficherAnnonce();
+    }else if(message.action === "afficherLevee"){
+        afficherLevee();
     }  
 }
 function onClose(e){
@@ -159,7 +161,16 @@ function jouerCarte(idcarte, valeur, couleur, carte){
  * Afficher la demande d'annonce
  */
 function afficherAnnonce(){
+    alert("afficherAnnonce")
     $('#annonces').show();
+}
+
+/**
+ * 
+ * afficher les carte joué par les autres joueurs
+ */
+function afficherLevee(){
+    alert("afficherLevee");
 }
 
 });

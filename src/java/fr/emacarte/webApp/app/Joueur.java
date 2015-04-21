@@ -1,7 +1,10 @@
 package fr.emacarte.webApp.app;
 
 import fr.emacarte.webApp.TarotWSEndpoint;
+import static fr.emacarte.webApp.app.Communication.envoyerMain;
 import java.util.ArrayList;
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.websocket.Session;
 
 public class Joueur {
@@ -118,10 +121,15 @@ public class Joueur {
 	public Carte poserCarte() {
 		afficherMain();
 		TarotWSEndpoint.sendChatMessage("Veuillez poser une carte.",id, "red");
+                
+                //ecoute
 		int rang=com.entreeCarte(this);
 		Carte cartePosee = main.get(rang);
 		main.remove(rang);
 		cartePosee.afficherCarte();
+                
+                
+                
 		return cartePosee;
 	}
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////        
