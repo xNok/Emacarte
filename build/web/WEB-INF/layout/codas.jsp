@@ -4,9 +4,11 @@
     Author     : Alexandre
 --%>
 <div class="test stick_to_bottom">
-  <a href="profil.jsp"><img src="img/avatar.png" class="avatar"></a>
+  <a href="/Emacarte/profil"><img src="/Emacarte/img/avatar.png" class="avatar"></a>
   <form action="connexion.html">
-  <a href="connexion.jsp"><button class="btn btn-lg btn-primary btn-block" type="button">Connexion</button></a>
+    <%-- <c:if test="${ !empty sessionScope.pseudo }"> --%>
+      <a href="/Emacarte/connexion"><button class="btn btn-lg btn-primary btn-block" type="button">Connexion</button></a>
+    <%-- </c:if> --%>
   </form>
 </div>
 
