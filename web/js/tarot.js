@@ -31,6 +31,10 @@ function onMessage(e){
         afficherMain(message.main);
     }else if(message.action === "annonce"){
         afficherAnnonce();
+    }else if(message.action === "afficherLevee"){
+        afficherLevee();
+    }else if(message.action === "envoyerChien"){
+        envoyerChien();
     }  
 }
 function onClose(e){
@@ -96,7 +100,7 @@ var carteDepose;
  * @returns Affiche la main et enregistre l'évènement jouer carte
  */
 function afficherMain(main){
-    alert("afficherMain");
+    //alert("afficherMain");
     
     //on vide le tapis précédent
     $('#tapis').empty();
@@ -132,7 +136,7 @@ function afficherMain(main){
  * @returns {undefined}
  */
 function jouerCarte(idcarte, valeur, couleur, carte){
-    alert("jouerCarte");
+    //alert("jouerCarte");
     
     //la dépose n'est pas vide
     if(carteDepose){
@@ -159,9 +163,23 @@ function jouerCarte(idcarte, valeur, couleur, carte){
  * Afficher la demande d'annonce
  */
 function afficherAnnonce(){
+    //alert("afficherAnnonce")
     $('#annonces').show();
 }
 
+/**
+ * 
+ * afficher les carte joué par les autres joueurs
+ */
+function afficherLevee(){
+    //alert("afficherLevee");
+}
+
+function envoyerChien(){
+    alert("afficherChien");        
+}
+
+//END
 });
 
 })(jQuery);
