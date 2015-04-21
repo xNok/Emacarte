@@ -22,6 +22,7 @@ public class Communication {
     public static final String carteDepose = "carteDepose";
     public static final String annonce = "annonce";
     public static final String afficherLevee = "afficherLevee";
+    public static final String envoyerChien = "envoyerChien" ;
 
     private String connexion;
     private String server;
@@ -31,7 +32,7 @@ public class Communication {
         server = "";
     }
 
-    public String envoyerCarte(Carte carte) {
+    public static String envoyerCarte(Carte carte) {
         String retour = "";
         retour += "{\"carte\":{\"couleur\":\"";
         retour += Integer.toString(carte.getCouleur());
@@ -46,7 +47,7 @@ public class Communication {
      * @param paquet
      * @return Main to Json
      */
-    public String envoyerMain(ArrayList<Carte> paquet) {
+    public static String envoyerMain(ArrayList<Carte> paquet) {
         
         JsonArrayBuilder main = Json.createArrayBuilder();
         for (int i = 0; i < paquet.size(); i++) {
@@ -65,50 +66,51 @@ public class Communication {
         return jo.toString();
     }
 
-    public String envoyerChien(ArrayList<Carte> paquet) {
-        String retour = "";
-        retour += "{\"chien\":{";
+    public static String envoyerChien(ArrayList<Carte> paquet) {
+        System.out.println("Com:envoyerChien");
+        
+        JsonArrayBuilder main = Json.createArrayBuilder();
         for (int i = 0; i < paquet.size(); i++) {
-            if (i != 0) {
-                retour += ",";
-            }
-            retour += "\"carte";
-            retour += "" + (i + 1);
-            retour += "\":{\"couleur\":\"";
-            retour += Integer.toString(paquet.get(i).getCouleur());
-            retour += "\",\"valeur\":\"";
-            retour += Integer.toString(paquet.get(i).getValeur());
-            retour += "\"}";
+            main.add(Json.createObjectBuilder()
+                .add("idcarte",i)    
+                .add("couleur", paquet.get(i).getCouleur())
+                .add("valeur", paquet.get(i).getValeur())
+            );
         }
-        retour += "}}";
-        return retour;
+        
+        JsonObject jo = Json.createObjectBuilder()
+            .add("action", envoyerChien)
+            .add("main", main)
+        .build();
+        
+        return jo.toString();
     }
 
-    public String envoyerScore(int score) {
+    public static String envoyerScore(int score) {
         String retour = "";
         retour += "{\"score\":\"" + Integer.toString(score) + "\"}";
         return retour;
     }
 
-    public String envoyerAnnonce(int annonce) {
+    public static String envoyerAnnonce(int annonce) {
         String retour = "";
         retour += "{\"annonce\":\"" + Integer.toString(annonce) + "\"}";
         return retour;
     }
 
-    public String resultat(int resultat) {
+    public static String resultat(int resultat) {
         String retour = "";
         retour += "{\"resultat\":\"" + Integer.toString(resultat) + "\"}";
         return retour;
     }
 
-    public String preneur(Joueur[] joueurs, int preneur) {
+    public static String preneur(Joueur[] joueurs, int preneur) {
         String retour = "";
         retour += "{\"preneur\":\"" + joueurs[preneur].getId() + "\"}";
         return retour;
     }
 
-    public int entreeCarte(Joueur joueur) {
+    public static int entreeCarte(Joueur joueur) {
         System.out.println("Com : entrer cartes");
         int l = joueur.getMain().size();
         boolean ok = false;
@@ -133,7 +135,7 @@ public class Communication {
         return retour;
     }
 
-    public int entreeAnnonce(Joueur joueur) {
+    public static int entreeAnnonce(Joueur joueur) {
         System.out.println("Com : entrer annonce");
         boolean ok = false;
         int retour = 0;

@@ -78,7 +78,11 @@ public class Tarot{
             }
             if (annonce < 5) {
                 if (annonce < 3) {
-                    joueurs[preneur].prendreChien(pioche);
+                    System.out.println("Tarot:envoyerChien");
+                    ArrayList<Carte> chien = joueurs[preneur].prendreChien(pioche);
+                    
+                    //affichage
+                    broadcastInfo(Communication.envoyerChien(chien));
                 }
                 preneurs.addAll(pioche.getChien());
                 pioche.getChien().clear();

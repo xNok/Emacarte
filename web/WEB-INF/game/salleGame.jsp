@@ -68,8 +68,9 @@
                <div id="annonces">
                    <div class="annonce" idannonce="0"><span>Passer</span></div>
                    <div class="annonce" idannonce="1"><span>Petite</span></div>
-                   <div class="annonce" idannonce="2"><span>Garde Sans</span></div>
-                   <div class="annonce" idannonce="4"><span>Barde Contre</span></div>
+                   <div class="annonce" idannonce="2"><span>Garde</span></div>
+                   <div class="annonce" idannonce="4"><span>Garde Sans</span></div>
+                   <div class="annonce" idannonce="6"><span>Garde Contre</span></div>
                </div>
                <div id="tapis"></div>
            </div>

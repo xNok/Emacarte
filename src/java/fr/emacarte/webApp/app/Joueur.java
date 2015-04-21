@@ -232,9 +232,10 @@ public class Joueur {
                 return annonce;
 	}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	public void prendreChien(Pioche pioche){
+	public ArrayList<Carte> prendreChien(Pioche pioche){
 		pioche.afficherChien();
 		main.addAll(pioche.getChien());
+                ArrayList<Carte> retour = pioche.getChien();
 		trierMain();
 		pioche.getChien().clear();
 		for(int i = 0; i<6; i++){
@@ -251,6 +252,8 @@ public class Joueur {
 			main.remove(rang);
 		}
                 TarotWSEndpoint.sendChatMessage("Le chien est fait !",id);
+                
+            return retour;
 	}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/*
