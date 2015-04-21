@@ -38,10 +38,8 @@
     </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="bouton"><a href="/Emacarte/nouveautes">Nouveautés</a></li>
-        <%-- <c:if test="${ !empty sessionScope.pseudo }"> --%>
-            <li class="bouton"><a href="/Emacarte/jeux">Jeux</a></li>
-            <li class="bouton"><a href="/Emacarte/profil">Profil</a></li>
-        <%-- </c:if> --%>
+        <li class="bouton"><a href="/Emacarte/jeux">Jeux</a></li>
+        <li class="bouton"><a href="/Emacarte/utilisateur/profil">Profil</a></li>
         <li class="bouton"><a href="/Emacarte/contact">Contact</a></li>
         <li>
           <img src="/Emacarte/img/EMA_credit.png" class="credit">
