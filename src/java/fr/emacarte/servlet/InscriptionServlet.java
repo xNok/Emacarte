@@ -5,6 +5,8 @@
  */
 package fr.emacarte.servlet;
 
+import fr.emacarte.form.InscriptionForm;
+import fr.emacarte.model.Utilisateur;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -17,6 +19,10 @@ import javax.servlet.http.HttpServletResponse;
  * @author Alexandre
  */
 public class InscriptionServlet extends HttpServlet {
+    
+    public static final String ATT_USER = "utilisateur";
+    public static final String ATT_FORM = "form";
+    public static final String VUE = "/WEB-INF/inscription.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -29,7 +35,7 @@ public class InscriptionServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //TODO
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -44,7 +50,8 @@ public class InscriptionServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        /* Affichage de la page d'inscription */
+        this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
     }
 
     /**
@@ -58,7 +65,17 @@ public class InscriptionServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+                /* Préparation de l'objet formulaire */
+        InscriptionForm form = new InscriptionForm();
+		
+        /* Appel au traitement et à la validation de la requête, et récupération du bean en résultant */
+        Utilisateur utilisateur = form.inscrireUtilisateur( request );
+		
+        /* Stockage du formulaire et du bean dans l'objet request */
+        request.setAttribute( ATT_FORM, form );
+        request.setAttribute( ATT_USER, utilisateur );
+		
+        doGet(request, response);
     }
 
     /**

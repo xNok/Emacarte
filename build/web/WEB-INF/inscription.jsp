@@ -10,16 +10,34 @@
       <div class="col-md-4">
       </div>
       <div class="col-md-4">
-      <form class="form-signin">
-        <h2 class="form-signin-heading">Inscrivez vous</h2>
-        <label for="inputEmail" class="sr-only">Email</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
-        <label for="inputPassword" class="sr-only">Pseudo</label>
-        <input type="text" id="inputText" class="form-control" placeholder="Pseudo" required>
-        <label for="inputPassword" class="sr-only">Mot de passe</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Mot de passe" required>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Inscription</button>
-      </form>
+        <form class="form-signin" method="post" action="inscription">
+          <h2 class="form-signin-heading">Inscrivez vous</h2>
+
+              <label for="email">Adresse email <span class="requis">*</span></label>
+              <input type="email" id="email" name="email" value="<c:out value="${utilisateur.email}"/>" size="20" maxlength="60" />
+              <span class="erreur">${form.erreurs['email']}</span>
+              <br />
+
+              <label for="motdepasse">Mot de passe <span class="requis">*</span></label>
+              <input type="password" id="motdepasse" name="motdepasse" value="" size="20" maxlength="20" />
+              <span class="erreur">${form.erreurs['motdepasse']}</span>
+              <br />
+
+              <label for="confirmation">Confirmation du mot de passe <span class="requis">*</span></label>
+              <input type="password" id="confirmation" name="confirmation" value="" size="20" maxlength="20" />
+              <span class="erreur">${form.erreurs['confirmation']}</span>
+              <br />
+
+              <label for="nom">Nom d'utilisateur</label>
+              <input type="text" id="nom" name="nom" value="<c:out value="${utilisateur.nom}"/>" size="20" maxlength="20" />
+              <span class="erreur">${form.erreurs['nom']}</span>
+              <br />
+
+              <input type="submit" value="Inscription" class="sansLabel" />
+              <br />
+
+              <p class="${empty form.erreurs ? 'succes' : 'erreur'}">${form.resultat}</p>
+        </form>
       </div>
       <div class="col-md-4">
       </div>

@@ -5,7 +5,6 @@
  */
 package fr.emacarte.servlet;
 
-import static fr.emacarte.servlet.ConnexionServlet.GET;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;

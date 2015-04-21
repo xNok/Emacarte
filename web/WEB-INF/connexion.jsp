@@ -10,19 +10,27 @@
       <div class="col-md-4">
       </div>
       <div class="col-md-4">
-      <form class="form-signin">
+      <form class="form-signin" method="post" action="connexion">
         <h2 class="form-signin-heading">Connectez vous</h2>
-        <label for="inputEmail" class="sr-only">Email</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
-        <label for="inputPassword" class="sr-only">Mot de passe</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Mot de passe" required>
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" value="remember-me"> Se souvenir de moi
-          </label>
-        </div>
+                <label for="nom">Adresse email <span class="requis">*</span></label>
+                <input type="email" id="email" name="email" value="<c:out value="${utilisateur.email}"/>" size="20" maxlength="60" />
+                <span class="erreur">${form.erreurs['email']}</span>
+                <br />
+
+                <label for="motdepasse">Mot de passe <span class="requis">*</span></label>
+                <input type="password" id="motdepasse" name="motdepasse" value="" size="20" maxlength="20" />
+                <span class="erreur">${form.erreurs['motdepasse']}</span>
+                <br />
+                
         <button class="btn btn-lg btn-primary btn-block" type="submit">Connexion</button>
         <button class="btn btn-lg btn-primary btn-block" href="/Emacarte/inscription">Inscription</button>
+                <p class="${empty form.erreurs ? 'succes' : 'erreur'}">${form.resultat}</p>
+                
+        <%-- Vérification de la présence d'un objet utilisateur en session --%>
+        <c:if test="${!empty sessionScope.sessionUtilisateur}">
+            <%-- Si l'utilisateur existe en session, alors on affiche son adresse email. --%>
+            <p class="succes">Vous êtes connecté(e) avec l'adresse : ${sessionScope.sessionUtilisateur.email}</p>
+        </c:if>
       </form>
       </div>
       <div class="col-md-4">
