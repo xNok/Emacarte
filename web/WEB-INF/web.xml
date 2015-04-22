@@ -32,9 +32,6 @@
         <filter-name>AdminFilter</filter-name>
         <url-pattern>/admin</url-pattern>
     </filter-mapping>
-    <listener>
-        <listener-class>fr.emacarte.database.InitialisationDaoFactory</listener-class>
-    </listener>
     <servlet>
         <servlet-name>UserHomeServlet</servlet-name>
         <servlet-class>fr.emacarte.servlet.UserHomeServlet</servlet-class>

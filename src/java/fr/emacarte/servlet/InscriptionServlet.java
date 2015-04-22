@@ -10,7 +10,6 @@ import fr.emacarte.database.dao.UtilisateurDAO;
 import fr.emacarte.form.InscriptionForm;
 import fr.emacarte.model.Utilisateur;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -26,13 +25,13 @@ public class InscriptionServlet extends HttpServlet {
     public static final String ATT_FORM = "form";
     public static final String VUE = "/WEB-INF/inscription.jsp";
     
-    public static final String CONF_DAO_FACTORY = "daofactory";
-    private UtilisateurDAO     utilisateurDao;
+    //public static final String CONF_DAO_FACTORY = "daofactory";
+    //private UtilisateurDAO     utilisateurDao;
 
     @Override
     public void init() throws ServletException {
         /* Récupération d'une instance de notre DAO Utilisateur */
-        this.utilisateurDao = ( (DAOFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getUtilisateurDao();
+        //this.utilisateurDao = ( (DAOFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getUtilisateurDao();
     }
 
     /**
@@ -77,7 +76,7 @@ public class InscriptionServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
                 /* Préparation de l'objet formulaire */
-        InscriptionForm form = new InscriptionForm( utilisateurDao );
+        InscriptionForm form = new InscriptionForm( );
 		
         /* Appel au traitement et à la validation de la requête, et récupération du bean en résultant */
         Utilisateur utilisateur = form.inscrireUtilisateur( request );

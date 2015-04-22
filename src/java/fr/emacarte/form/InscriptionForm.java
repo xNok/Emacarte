@@ -20,7 +20,7 @@ import org.jasypt.util.password.ConfigurablePasswordEncryptor;
  */
 public class InscriptionForm {
 
-   private static final String CHAMP_EMAIL      = "email";
+    private static final String CHAMP_EMAIL      = "email";
     private static final String CHAMP_PASS       = "motdepasse";
     private static final String CHAMP_CONF       = "confirmation";
     private static final String CHAMP_NOM        = "nom";
@@ -29,10 +29,18 @@ public class InscriptionForm {
 
     private String              resultat;
     private Map<String, String> erreurs          = new HashMap<String, String>();
+    
+    
     private UtilisateurDAO      utilisateurDao;
+    private boolean DAO = false;
 
     public InscriptionForm( UtilisateurDAO utilisateurDao ) {
         this.utilisateurDao = utilisateurDao;
+        this.DAO = true;
+    }
+
+    public InscriptionForm() {
+        
     }
 
     public Map<String, String> getErreurs() {

@@ -3,19 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Ecole/1A/Info/workspace/Emacarte/web/WEB-INF/web.xml</file>
-            <file>file:/D:/Ecole/1A/Info/workspace/Emacarte/src/java/fr/emacarte/database/dao.properties</file>
-            <file>file:/D:/Ecole/1A/Info/workspace/Emacarte/src/java/fr/emacarte/database/dao/DAOUtilitaire.java</file>
-            <file>file:/D:/Ecole/1A/Info/workspace/Emacarte/src/java/fr/emacarte/database/dao/UtilisateurDAOImpl.java</file>
-            <file>file:/D:/Ecole/1A/Info/workspace/Emacarte/src/java/fr/emacarte/database/dao/DAOFactory.java</file>
-            <file>file:/D:/Ecole/1A/Info/workspace/Emacarte/src/java/fr/emacarte/database/dao/UtilisateurDAO.java</file>
-            <file>file:/D:/Ecole/1A/Info/workspace/Emacarte/src/java/fr/emacarte/database/dao/DAOConfigurationException.java</file>
+            <file>file:/D:/Ecole/1A/Info/workspace/Emacarte/src/java/fr/emacarte/form/ConnexionForm.java</file>
             <file>file:/D:/Ecole/1A/Info/workspace/Emacarte/src/java/fr/emacarte/servlet/InscriptionServlet.java</file>
             <file>file:/D:/Ecole/1A/Info/workspace/Emacarte/src/java/fr/emacarte/form/InscriptionForm.java</file>
-            <file>file:/D:/Ecole/1A/Info/workspace/Emacarte/src/java/fr/emacarte/database/dao/DAOException.java</file>
-            <file>file:/D:/Ecole/1A/Info/workspace/Emacarte/src/java/fr/emacarte/model/Utilisateur.java</file>
-            <file>file:/D:/Ecole/1A/Info/workspace/Emacarte/src/java/fr/emacarte/form/FormValidationException.java</file>
-            <file>file:/D:/Ecole/1A/Info/workspace/Emacarte/src/java/fr/emacarte/database/InitialisationDaoFactory.java</file>
         </group>
     </open-files>
 </project-private>
