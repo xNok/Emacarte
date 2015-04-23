@@ -7,6 +7,7 @@ var wsUri = "ws://localhost:8080/Emacarte/tarot/";
 
 var websocket;
 var output = $('#output');
+var infojeu = $('#infoJeu');
 init();
 
 //---------------inititialisation de la Web Socket---------------\\
@@ -20,13 +21,13 @@ function init() {
 }
 //---------------évènement lié à la web socket---------------\\
 function onOpen(e) {
-    writeToScreen("Connected to " + wsUri);
+    writeToScreen("Connected to " + wsUri,"chat");
 }
 function onMessage(e){
     var message = JSON.parse(e.data);
     console.log(message);
     if(message.action === "chat"){
-        writeToScreen('<span style="color: '+ message.color +';">'+message.message+'</span>');
+        writeToScreen('<span style="color: '+ message.color +';">'+message.message+'</span>',message.action);
     }else if(message.action === "afficherMain"){
         afficherMain(message.main);
     }else if(message.action === "annonce"){
@@ -35,6 +36,8 @@ function onMessage(e){
         afficherLevee();
     }else if(message.action === "envoyerChien"){
         envoyerChien();
+    }else if(message.action === "infojeu"){
+        writeToScreen('<span style="color: '+ message.color +';">'+message.message+'</span>',message.action);
     }  
 }
 function onClose(e){
@@ -53,8 +56,13 @@ function sendText(text){
 /*
  * ecrire dans la page
  */
-function writeToScreen(message) {  
-    output.html(output.html() + message + "<br>");
+function writeToScreen(message, action) {    
+    console.log("writeToScreen")
+    if(action === "chat"){
+        output.html(output.html() + message + "<br>");
+    }else if(action === "infojeu"){
+        infojeu.html(output.html() + message + "<br>");
+    }  
 }
 
 //---------------evènement---------------\\
@@ -100,7 +108,7 @@ var carteDepose;
  * @returns Affiche la main et enregistre l'évènement jouer carte
  */
 function afficherMain(main){
-    //alert("afficherMain");
+    console.log("afficherMain");
     
     //on vide le tapis précédent
     $('#tapis').empty();
@@ -136,7 +144,7 @@ function afficherMain(main){
  * @returns {undefined}
  */
 function jouerCarte(idcarte, valeur, couleur, carte){
-    //alert("jouerCarte");
+    console.log("jouerCarte");
     
     //la dépose n'est pas vide
     if(carteDepose){
@@ -163,7 +171,7 @@ function jouerCarte(idcarte, valeur, couleur, carte){
  * Afficher la demande d'annonce
  */
 function afficherAnnonce(){
-    //alert("afficherAnnonce")
+    console.log("afficherAnnonce")
     $('#annonces').show();
 }
 
@@ -172,7 +180,7 @@ function afficherAnnonce(){
  * afficher les carte joué par les autres joueurs
  */
 function afficherLevee(){
-    //alert("afficherLevee");
+    console.log("afficherLevee");
 }
 
 function envoyerChien(){

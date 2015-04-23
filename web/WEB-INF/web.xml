@@ -22,15 +22,15 @@
     </filter-mapping>
     <filter-mapping>
         <filter-name>UtilisateurFilter</filter-name>
-        <url-pattern>/utilisateur</url-pattern>
+        <url-pattern>/utilisateur/*</url-pattern>
     </filter-mapping>
     <filter-mapping>
         <filter-name>JeuxFilter</filter-name>
-        <url-pattern>/jeux</url-pattern>
+        <url-pattern>/jeux/*</url-pattern>
     </filter-mapping>
     <filter-mapping>
         <filter-name>AdminFilter</filter-name>
-        <url-pattern>/admin</url-pattern>
+        <url-pattern>/admin/*</url-pattern>
     </filter-mapping>
     <servlet>
         <servlet-name>UserHomeServlet</servlet-name>

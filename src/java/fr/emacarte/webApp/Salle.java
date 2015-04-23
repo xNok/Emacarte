@@ -18,7 +18,7 @@ import javax.websocket.Session;
  */
 class Salle implements Runnable{
     
-    public ArrayList<Session> players = new ArrayList();
+    public ArrayList<CustomSession> players = new ArrayList();
     public Tarot tarot;
     public String name;
     
@@ -48,17 +48,17 @@ class Salle implements Runnable{
         this.tarot = new Tarot();
     }
 
-    public void addPlayer(Session session) {
+    public void addPlayer(CustomSession session) {
         players.add(session);
-        TarotWSEndpoint.sendAsyncMessage("Bienvenue", session);
+        TarotWSEndpoint.sendAsyncMessage("Bienvenue", session.getSocketSession());
 
     }
     
     public void lancerPartie(){       
         Joueur[] joueurs = tarot.getJoueurs();
         for (int i = 0; i < 4; i++) {
-            Session p = players.get(i);
-            TarotWSEndpoint.sendChatMessage("Nous sommes 4 la partie commence", p);
+            CustomSession p = players.get(i);
+            TarotWSEndpoint.sendChatMessage("Nous sommes 4 la partie commence", p.getSocketSession());
             System.out.println(p);
             joueurs[i] = new Joueur(p);
         }
@@ -74,11 +74,11 @@ class Salle implements Runnable{
         return players.size();
     }
     
-    public ArrayList<Session> getPlayers() {
+    public ArrayList<CustomSession> getPlayers() {
         return players;
     }
 
-    public void setPlayers(ArrayList<Session> players) {
+    public void setPlayers(ArrayList<CustomSession> players) {
         this.players = players;
     }
 

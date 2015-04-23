@@ -50,6 +50,14 @@
     .selected{
         background-color: #2989d8;
     }
+    
+    #infoJeu{
+        height: 20%;
+        overflow: scroll;
+        position: fixed;
+        bottom: 80px;
+        right: 0;
+    }
 </style>
 
 <%-- 
@@ -62,18 +70,24 @@
     <div  class="row">
       <div class="col-md-1">
       </div>
+        
       <div class="col-md-11">
         <div class="col-md-12">
-            <div id="JeuContainer">
+            <div id="JeuContainer" class="row">
                <div id="annonces">
                    <div class="annonce" idannonce="0"><span>Passer</span></div>
                    <div class="annonce" idannonce="1"><span>Petite</span></div>
                    <div class="annonce" idannonce="2"><span>Garde</span></div>
                    <div class="annonce" idannonce="4"><span>Garde Sans</span></div>
                    <div class="annonce" idannonce="6"><span>Garde Contre</span></div>
-               </div>
-               <div id="tapis"></div>
-           </div>
+               </div>                
+                <div id="tapis">
+                    <!-- Injection JQuery -->
+                </div>
+            </div>
+                <div id="infoJeu" class="col-md-10">
+                    <!-- Injection JQuery -->
+                </div>
         </div>
       </div>
     </div>

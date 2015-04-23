@@ -66,7 +66,7 @@ public class Tarot{
         if (annonce != 0) {
             System.out.println("Tarot : jouerManche annonce!=0");
             //si ca marche on broadcast
-            broadcast(joueurs[preneur].getId() + " prend une " + annonce(annonce) + ".");
+            broadcast(joueurs[preneur].getNom() + " prend une " + annonce(annonce) + ".");
             broadcast("Commençons la manche.");
             
             //trie de la main
@@ -133,7 +133,7 @@ public class Tarot{
                     pointsNecessaires = 36;
                     break;
             }
-            broadcast(joueurs[preneur].getId() + " a fait " + pointsFaits + " points pour " + pointsNecessaires + ".");
+            broadcast(joueurs[preneur].getNom() + " a fait " + pointsFaits + " points pour " + pointsNecessaires + ".");
 
             joueurs[0].getMain().clear();
             joueurs[0].getMain().addAll(preneurs);
@@ -236,7 +236,7 @@ public class Tarot{
             opposants.addAll(levee);
         }
         broadcast("-------------------------------------------------------------------");
-        broadcast(joueurs[meilleur].getId() + " remporte la levée.");
+        broadcast(joueurs[meilleur].getNom() + " remporte la levée.");
         broadcast("-------------------------------------------------------------------");
         if(derniere==false){
             return meilleur;

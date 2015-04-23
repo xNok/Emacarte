@@ -53,4 +53,9 @@ public class Utilisateur {
     public void setDateInscription( Timestamp dateInscription ) {
         this.dateInscription = dateInscription;
     }
+
+    @Override
+    public String toString() {
+        return "Utilisateur{email=" + email + '}';
+    }
 }

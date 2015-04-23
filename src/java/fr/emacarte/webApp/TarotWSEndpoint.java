@@ -5,6 +5,8 @@
  */
 package fr.emacarte.webApp;
 
+import fr.emacarte.model.Utilisateur;
+import fr.emacarte.servlet.ConnexionServlet;
 import fr.emacarte.webApp.app.Communication;
 import java.io.IOException;
 import java.io.StringReader;
@@ -15,6 +17,7 @@ import javax.inject.Inject;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
+import javax.servlet.http.HttpSession;
 import javax.websocket.OnClose;
 import javax.websocket.OnError;
 import javax.websocket.OnMessage;
@@ -29,11 +32,25 @@ import javax.websocket.server.ServerEndpoint;
  */
 
 @ApplicationScoped
-@ServerEndpoint("/tarot/{room}")
+@ServerEndpoint(value = "/tarot/{room}", configurator = CustomConfigurator.class)
 public class TarotWSEndpoint {
     
     //Clefs utilisable pour le champ action
     public static final String[] keys = {"chat", "carteDepose", "annonce"};
+    
+    private HttpSession httpSession;
+
+    /**
+     * Injection session http
+     * @param httpSession 
+     */
+    public void setHttpSession(HttpSession httpSession)
+    {
+        if (this.httpSession != null)
+            throw new IllegalStateException("HttpSession has already been set!");
+
+        this.httpSession = httpSession;
+    }
     
     @Inject
     private static final TarotSessionHandler sessionHandler = new TarotSessionHandler();  
@@ -43,16 +60,21 @@ public class TarotWSEndpoint {
         session.getUserProperties().put("room", room);
         
         sendChatMessage("Connecté salle : " + room, session);
-        sendChatMessage(session.toString(), session);
-        sendChatMessage("Utilisateurs connectés à la plate-forme: "  + (session.getOpenSessions().size()+1), session);
-        sendChatMessage("Utilisateurs connectés à la salle: "  + (sessionHandler.getNbrSession(room)+1), session);
+        //sendChatMessage(session.toString(), session);
+        //sendChatMessage("Utilisateurs connectés à la plate-forme: "  + (session.getOpenSessions().size()+1), session);
+        //sendChatMessage("Utilisateurs connectés à la salle: "  + (sessionHandler.getNbrSession(room)+1), session);
         
         //initialisation des Clefs
         for(String key : keys){
             session.getUserProperties().put(key, "");
         }
         
-        sessionHandler.addSession(session, room);
+        //session utilisateur
+        System.out.println("Session Id: " + httpSession.getAttribute(ConnexionServlet.ATT_SESSION_USER));
+        
+        CustomSession s = new CustomSession(session, httpSession);
+        
+        sessionHandler.addSession(s, room);
     }
     
     @OnMessage
@@ -126,14 +148,14 @@ public class TarotWSEndpoint {
     }
     
     /**
-     * Construction des message pour le chat
+     * Construction des message pour l'infojeu
      * @param message
      * @param session
      * @param color compréhensible pour une propiétée css
      */
     public static void sendChatMessage(String message, Session session, String color){
         String json = "{"
-           + "\"action\": \"chat\","
+           + "\"action\": \"infojeu\","
            + "\"message\": \""+ message + "\","
            + "\"color\": \""+ color + "\""
            + "}"

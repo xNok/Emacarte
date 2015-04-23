@@ -5,6 +5,7 @@
  */
 package fr.emacarte.webApp;
 
+import fr.emacarte.model.Utilisateur;
 import java.util.HashMap;
 import javax.faces.bean.ApplicationScoped;
 import javax.websocket.Session;
@@ -16,7 +17,11 @@ import javax.websocket.Session;
 @ApplicationScoped
 public class TarotSessionHandler {
     
-    private final HashMap<Session, String> sessions = new HashMap();
+    //email -- session
+    public static HashMap<String, CustomSession> utilisateurs = new HashMap();
+    //session -- salle
+    public static HashMap<CustomSession, String> sessions = new HashMap();
+    //numéros ou id -- Salle
     public static HashMap<String, Salle> salles = new HashMap();
     
     public TarotSessionHandler(){
@@ -30,11 +35,21 @@ public class TarotSessionHandler {
         salles.put(String.valueOf(salles.size()+1), s);
      }
     
-    public void addSession(Session session, String room){
-        sessions.put(session, room);
-        Salle s = salles.get(room);
-        s.addPlayer(session);
-        System.out.println("Session ajouté à la salle n°" + room + " totale: " + getNbrSession(room));
+    public void addSession(CustomSession session,String room){
+        //TODO
+        //le joueur à actualisr la page -- la web socket session a changé
+        if(utilisateurs.containsKey(session.getEmail())){
+            CustomSession oldsession = utilisateurs.get(session.getEmail());
+            sessions.remove(oldsession);
+            utilisateurs.get(session.getEmail()).update(session);
+            System.out.println("Session mise à jours");
+        }else{
+            Salle s = salles.get(room);
+            s.addPlayer(session); 
+            System.out.println("Session ajouté à la salle n°" + room + " totale: " + getNbrSession(room));
+        }  
+        
+        utilisateurs.put(session.getEmail(), session);
     }
     
     public void removeSession(Session session, String room){        

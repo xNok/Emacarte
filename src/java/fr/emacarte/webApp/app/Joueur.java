@@ -1,5 +1,6 @@
 package fr.emacarte.webApp.app;
 
+import fr.emacarte.webApp.CustomSession;
 import fr.emacarte.webApp.TarotWSEndpoint;
 import static fr.emacarte.webApp.app.Communication.envoyerMain;
 import java.util.ArrayList;
@@ -9,12 +10,14 @@ import javax.websocket.Session;
 
 public class Joueur {
 	private Session id;
+        private String nom;
 	private ArrayList<Carte> main;
 	private float score;
 	private Communication com;
 
-	public Joueur(Session i) {
-		id = i;
+	public Joueur(CustomSession i) {
+		id = i.getSocketSession();
+                nom = i.getEmail();
 		score = 0;
 		main = new ArrayList<Carte>();
                 com = new Communication();
@@ -296,5 +299,15 @@ public class Joueur {
 	public void setScore(float f) {
 		this.score = f;
 	}
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+        
+        
 
 }
