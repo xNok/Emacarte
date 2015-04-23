@@ -6,19 +6,23 @@
 
 
 <div class="test stick_to_bottom">
-            
-    <c:choose>
-      <c:when test="${ empty sessionScope.sessionUtilisateur }">pizza.
-        <form action="connexion.html">
-            <a href="/Emacarte/connexion"><button class="btn btn-lg btn-primary btn-block" type="button">Connexion</button></a>
-        </form>
-      </c:when>
+    <div class="row">         
+        <c:choose>
+          <c:when test="${ empty sessionScope.sessionUtilisateur }">
+            <form action="connexion.html">
+                <a href="/Emacarte/connexion"><button class="btn btn-lg btn-primary btn-block" type="button">Connexion</button></a>
+            </form>
+          </c:when>
 
-      <c:otherwise>pizzas.
-        <a href="/Emacarte/profil"><img src="/Emacarte/img/avatar.png" class="avatar"></a>
-      </c:otherwise>
-    </c:choose>
-
+          <c:otherwise>
+              <div class="col-md-6 col-md-offset-1">
+                <a href="/Emacarte/profil"><img src="/Emacarte/img/avatar.png" class="avatar"></a>
+                <p>Vous étes connécté</p>
+                <p>${sessionScope.sessionUtilisateur.email}</p>
+              </div>
+          </c:otherwise>
+        </c:choose>
+    </div>   
 </div>
 
 

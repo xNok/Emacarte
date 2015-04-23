@@ -67,8 +67,17 @@
         <div class="ptitrucdubas">
       </div>
 </header>
+
+
   <div class="tchat">
-    <form id="text" action=""><input type="text" class="text"></form>
+ <c:if test="${ !empty sessionScope.sessionUtilisateur }">
+    <div id="output" ></div>
+    <form  action="post">        
+        <input type="text" name="input" value="" id="input" class="text"/>
+        <input type="submit" value="" id="submit" class="submitChat imgtchat" />
+    </form>
     <img src="/Emacarte/img/tchatbout.jpg" href="/Emacarte/profil" class="imgtchat">
+ </c:if>
   </div>
+
 

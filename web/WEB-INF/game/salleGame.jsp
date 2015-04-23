@@ -74,13 +74,6 @@
                </div>
                <div id="tapis"></div>
            </div>
-           <div id="chat">
-               <div id="output" ></div>
-               <form action="post">
-                   <input type="text" name="input" value="" id="input" />
-                   <input type="submit" value="Envoyer" id="submit"/>
-               </form>
-           </div>
         </div>
       </div>
     </div>

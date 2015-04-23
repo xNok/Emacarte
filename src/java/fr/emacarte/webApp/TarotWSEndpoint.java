@@ -149,6 +149,6 @@ public class TarotWSEndpoint {
      * color = blue
      */
     public static void sendChatMessage(String message, Session session){
-        sendChatMessage(message, session, "blue");
+        sendChatMessage(message, session, "white");
     }
 }
