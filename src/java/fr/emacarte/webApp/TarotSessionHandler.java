@@ -5,7 +5,6 @@
  */
 package fr.emacarte.webApp;
 
-import fr.emacarte.model.Utilisateur;
 import java.util.HashMap;
 import javax.faces.bean.ApplicationScoped;
 import javax.websocket.Session;

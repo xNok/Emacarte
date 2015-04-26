@@ -50,8 +50,8 @@ class Salle implements Runnable{
 
     public void addPlayer(CustomSession session) {
         players.add(session);
-        TarotWSEndpoint.sendAsyncMessage("Bienvenue", session.getSocketSession());
-
+        TarotWSEndpoint.sendChatMessage("Bienvenue", session.getSocketSession());
+        broadcast(session.getUtilisateur().getEmail() + " entre dans la salle --joueur : "+ getSize());
     }
     
     public void lancerPartie(){       
@@ -66,10 +66,21 @@ class Salle implements Runnable{
         tarot.jouerPartie();
     }
     
+    public void broadcast(String message){
+        System.out.println("broadcast : " + message);
+        for (CustomSession p:players) {
+            TarotWSEndpoint.sendChatMessage(message, p.getSocketSession());
+        }
+    }
+    
     public void removePlayer(Session session) {
         players.remove(session);
     }
     
+    /**
+     * 
+     * @return Nombre de joueur dans la salle
+     */
     public int getSize(){
         return players.size();
     }

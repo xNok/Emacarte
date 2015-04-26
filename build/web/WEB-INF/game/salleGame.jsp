@@ -37,7 +37,7 @@
         margin: 20px;
     }
     #tapis{
-        min-height: 100px;
+        min-height: 400px;
     }
     #chat{
         width: 50%;
@@ -85,7 +85,7 @@
                     <!-- Injection JQuery -->
                 </div>
             </div>
-                <div id="infoJeu" class="col-md-10">
+                <div id="infoJeu" class="col-lg-10 col-md-8">
                     <!-- Injection JQuery -->
                 </div>
         </div>
