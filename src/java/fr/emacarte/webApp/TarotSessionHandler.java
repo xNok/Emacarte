@@ -35,20 +35,21 @@ public class TarotSessionHandler {
      }
     
     public void addSession(CustomSession session,String room){
-        //TODO
+        Salle s = salles.get(room);
         //le joueur à actualisr la page -- la web socket session a changé
         if(utilisateurs.containsKey(session.getEmail())){
-            CustomSession oldsession = utilisateurs.get(session.getEmail());
-            sessions.remove(oldsession);
+            //on mette a jours les paramètres de la CustomSession
             utilisateurs.get(session.getEmail()).update(session);
+            s.broadcast("reconnection de " + utilisateurs.get(session.getEmail()).getEmail());
             System.out.println("Session mise à jours");
-        }else{
-            Salle s = salles.get(room);
+        }else{     
+            sessions.put(session, room);
+            utilisateurs.put(session.getEmail(), session);
             s.addPlayer(session); 
             System.out.println("Session ajouté à la salle n°" + room + " totale: " + getNbrSession(room));
         }  
         
-        utilisateurs.put(session.getEmail(), session);
+
     }
     
     public void removeSession(Session session, String room){        

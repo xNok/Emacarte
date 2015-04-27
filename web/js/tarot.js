@@ -73,7 +73,7 @@ function writeToScreen(message, action) {
 $("#submit").click(function(e){
         e.preventDefault(); //annule l'action d'envoi du formulaire
         var input = $('#input').val();
-        writeToScreen('<span style="color: red;">'+input+'</span>');
+        writeToScreen('<span style="color: red;">'+input+'</span>',"chat");
 
         var message = {
             action: "chat",
