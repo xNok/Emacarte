@@ -5,9 +5,6 @@
 --%>
 <style>
     .carte{
-        margin: 20px;
-        width: 30px;
-        height: 30px;
         background-color: red;
         float: left;
         text-align: center;
@@ -15,8 +12,9 @@
     }
     
     #JeuContainer{
-        float: right;
-        width: 50%;
+        position: absolute;
+        height: 550px;
+        width:1000px;
     }
     
     #depose{

@@ -116,8 +116,6 @@ function afficherMain(main){
     //on vide le tapis précédent
     $('#tapis').empty();
     
-    //on affiche le tapis
-    $('#tapis').css("background-color", "#F0FFF0");
     
     //affiche des cartes
     $.each(main, function(i, item) {
@@ -126,6 +124,36 @@ function afficherMain(main){
                 + "<img src=\"/Emacarte/img/cartes/"+item.couleur+"_"+item.valeur+".jpg\"/>" +
                 "</div>"
         );
+
+        var i=30;
+
+	$('.carte').each(function(index){
+		$(this).css({
+			'top':'270px',
+			'left': i+"%"
+		});
+		i+=40/$('.carte').length;
+	});
+	$('.carte').bind('mouseenter',function(){
+		$(this).animate({
+			'top': '250px'
+		},150);
+	}).bind('mouseleave',function(){
+		$(this).animate({
+			'top': '270px'
+		},150)
+	});
+
+	$('.carte').click(function(event){
+		$('.carte').each(function(index){
+			$(this).unbind('click');
+		});
+		$(this).unbind('mouseleave mouseenter').stop().animate({
+			'top': '200px',
+			'left': '50%'
+		}).delay(1000).addClass('jouee');
+	});
+        
     });
     
     //mise à jours, enregistrement de l'évènement pour les cartes

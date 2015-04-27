@@ -5,8 +5,6 @@
  */
 package fr.emacarte.servlet;
 
-import fr.emacarte.database.dao.DAOFactory;
-import fr.emacarte.database.dao.UtilisateurDAO;
 import fr.emacarte.form.InscriptionForm;
 import fr.emacarte.model.Utilisateur;
 import java.io.IOException;
@@ -20,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Alexandre
  */
 public class InscriptionServlet extends HttpServlet {
+    public static final String GET = "/WEB-INF/inscription.jsp";
     
     public static final String ATT_USER = "utilisateur";
     public static final String ATT_FORM = "form";
@@ -30,6 +29,7 @@ public class InscriptionServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
+        
         /* Récupération d'une instance de notre DAO Utilisateur */
         //this.utilisateurDao = ( (DAOFactory) getServletContext().getAttribute( CONF_DAO_FACTORY ) ).getUtilisateurDao();
     }
@@ -45,6 +45,7 @@ public class InscriptionServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        this.getServletContext().getRequestDispatcher( GET ).forward(request, response);
 
     }
 
