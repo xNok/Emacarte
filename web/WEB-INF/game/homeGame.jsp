@@ -8,16 +8,15 @@
     Created on : 7 avr. 2015, 10:47:47
     Author     : Setra
 --%>
-<div class="corps">
-  <div class=container>
+<div class="corps imgfondpartie">
+  <div class="container ">
     <div  class="row">
-      <div class="col-md-1">
-      </div>
       <div class="col-md-11">
         <div class="col-md-12">
+            <br>
+            <br>
+        <a href="jeux/create" ><button class="btn btn-lg btn-primary btn-block" type="submit">Créer une partie</button></a>
             <ul>
-                <li><a href="jeux/create" >Créer une partie</a></li>
-                <c:out value="${ salles }" />
                 <c:forEach items="${ salles }" var="titre" varStatus="status">
                     <li><a href="jeux/salle_de_jeux?num=${ titre }" >Rejoindre la salle N° <c:out value="${ titre }" /></a></li>
                 </c:forEach>

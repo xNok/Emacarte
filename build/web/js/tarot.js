@@ -123,7 +123,7 @@ function afficherMain(main){
     $.each(main, function(i, item) {
         $('#tapis').append(
                 "<div class=\"carte\" couleur=\""+ item.couleur +"\" valeur=\""+ item.valeur +"\" idcarte=\""+ i +"\">"
-                + "<span>" + item.couleur +";"+ item.valeur + "</span>" +
+                + "<img src=\"/Emacarte/img/cartes/"+item.couleur+"_"+item.valeur+".jpg\"/>" +
                 "</div>"
         );
     });

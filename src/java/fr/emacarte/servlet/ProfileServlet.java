@@ -5,10 +5,10 @@
  */
 package fr.emacarte.servlet;
 
+import static fr.emacarte.servlet.HomeServlet.GET;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Alexandre
  */
 public class ProfileServlet extends HttpServlet {
-
+    public static final String GET = "/WEB-INF/profil.jsp";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -31,6 +31,8 @@ public class ProfileServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        this.getServletContext().getRequestDispatcher( GET ).forward(request, response);
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */

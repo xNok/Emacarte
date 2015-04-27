@@ -65,7 +65,7 @@
     Created on : 7 avr. 2015, 10:47:47
     Author     : Setra
 --%>
-<div class="corps">
+<div class="corps imgfondpartie">
   <div class=container>
     <div  class="row">
       <div class="col-md-1">
