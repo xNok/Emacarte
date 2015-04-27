@@ -16,7 +16,7 @@
 
           <c:otherwise>
               <div class="col-md-6 col-md-offset-1">
-                <a href="/Emacarte/profil"><img src="/Emacarte/img/avatar.png" class="avatar"></a>
+                <a href="/Emacarte/utilisateur/profil"><img src="/Emacarte/img/avatar.png" class="avatar"></a>
                 <p>Vous étes connécté</p>
                 <p>${sessionScope.sessionUtilisateur.email}</p>
               </div>

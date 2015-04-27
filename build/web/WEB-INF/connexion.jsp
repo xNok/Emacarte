@@ -23,7 +23,6 @@
                 <br />
                 
         <button class="btn btn-lg btn-primary btn-block" type="submit">Connexion</button>
-        <button class="btn btn-lg btn-primary btn-block" href="/Emacarte/inscription">Inscription</button>
                 <p class="${empty form.erreurs ? 'succes' : 'erreur'}">${form.resultat}</p>
                 
         <%-- Vérification de la présence d'un objet utilisateur en session --%>
@@ -32,6 +31,7 @@
             <p class="succes">Vous êtes connecté(e) avec l'adresse : ${sessionScope.sessionUtilisateur.email}</p>
         </c:if>
       </form>
+        <a href="/Emacarte/inscription"><button class="btn btn-lg btn-primary btn-block">Inscription</button></a>
       </div>
       <div class="col-md-4">
       </div>

@@ -68,6 +68,10 @@
         <servlet-name>ContactServlet</servlet-name>
         <servlet-class>fr.emacarte.servlet.ContactServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ReglesServlet</servlet-name>
+        <servlet-class>fr.emacarte.servlet.ReglesServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UserHomeServlet</servlet-name>
         <url-pattern>/membre/home</url-pattern>
@@ -106,6 +110,10 @@
     <servlet-mapping>
         <servlet-name>ProfileServlet</servlet-name>
         <url-pattern>/utilisateur/profil</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReglesServlet</servlet-name>
+        <url-pattern>/regles</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

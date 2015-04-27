@@ -3,14 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Ecole/1A/Info/workspace/Emacarte/src/java/fr/emacarte/webApp/TarotSessionHandler.java</file>
-            <file>file:/D:/Ecole/1A/Info/workspace/Emacarte/src/java/fr/emacarte/webApp/app/Tarot.java</file>
-            <file>file:/D:/Ecole/1A/Info/workspace/Emacarte/web/WEB-INF/game/salleGame.jsp</file>
-            <file>file:/D:/Ecole/1A/Info/workspace/Emacarte/src/java/fr/emacarte/webApp/Salle.java</file>
-            <file>file:/D:/Ecole/1A/Info/workspace/Emacarte/src/java/fr/emacarte/webApp/TarotWSEndpoint.java</file>
-            <file>file:/D:/Ecole/1A/Info/workspace/Emacarte/src/java/fr/emacarte/webApp/app/Joueur.java</file>
-            <file>file:/D:/Ecole/1A/Info/workspace/Emacarte/src/java/fr/emacarte/webApp/CustomSession.java</file>
-            <file>file:/D:/Ecole/1A/Info/workspace/Emacarte/src/java/fr/emacarte/webApp/app/Communication.java</file>
+            <file>file:/D:/1Doc_setra/Work/Info/UEE_info/ProjetFinalFinal/Emacarte/web/WEB-INF/layout/codas.jsp</file>
+            <file>file:/D:/1Doc_setra/Work/Info/UEE_info/ProjetFinalFinal/Emacarte/web/css/style.css</file>
+            <file>file:/D:/1Doc_setra/Work/Info/UEE_info/ProjetFinalFinal/Emacarte/web/WEB-INF/game/salleGame.jsp</file>
+            <file>file:/D:/1Doc_setra/Work/Info/UEE_info/ProjetFinalFinal/Emacarte/web/WEB-INF/game/createGame.jsp</file>
+            <file>file:/D:/1Doc_setra/Work/Info/UEE_info/ProjetFinalFinal/Emacarte/web/WEB-INF/game/homeGame.jsp</file>
+            <file>file:/D:/1Doc_setra/Work/Info/UEE_info/ProjetFinalFinal/Emacarte/web/WEB-INF/regles.jsp</file>
         </group>
     </open-files>
 </project-private>
